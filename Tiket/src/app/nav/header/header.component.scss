@@ -1,0 +1,92 @@
+%config{
+    width: 80%;
+    padding:0 10%;
+    font-family: sans-serif;
+}
+%items{
+    font-size: 1vw;
+    &:hover{
+        color:rgb(23, 126, 185)
+    }
+}
+%container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.top{
+    @extend %config;
+    height: 2vw;
+    background-color: gainsboro;
+    display: flex;
+    align-items: center;
+    font-size: 1vw;
+    justify-content: space-between;
+}
+.left-top{
+    @extend %container;
+    width: 25vw;
+}
+.def-items{
+    @extend %items;
+}
+.caret{
+    // content: "asdaasdasdasdasdasdasd";
+    &:before{
+        content: "asdaasdasdasdasdasdasd";
+    }
+}
+.head{
+    @extend %config;
+    height:6%;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo{
+    // width: 5vw;
+    height: 3vw;
+    img{
+        width: 10vw;
+        height: 3vw;
+        object-fit: contain;
+        padding-right:1vw;
+    }
+}
+a{
+    // background-color: blue;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+.left-header{
+    padding: 1vw 0;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .left-items-container{
+        @extend %container;
+        width: 28vw;
+        
+    }
+}
+
+.right-items-container{
+    @extend %container;
+    width: 20vw;
+    .right-items{
+        @extend %items;
+        font-weight: bold;
+        color: rgb(65, 57, 57);
+    }
+}
+.abutton{
+    font-size: 1vw;
+    font-weight: bold;
+    padding:0.5vw 0.9vw;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px 0 rgba(53,64,90,.2);
+    color: rgb(43, 116, 253);
+}
