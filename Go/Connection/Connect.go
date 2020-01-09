@@ -15,5 +15,5 @@ const dbPassword = ""
 
 func Connect()(*gorm.DB, error){
 	fmt.Println("???????")
-	return gorm.Open("postgres","host=" + dbHost+" port="+dbPort +" user="+dbUser+" dbname="+dbName+" password="+dbPassword+" sslmode=disable")
+	//return gorm.Open("postgres","host=" + dbHost+" port="+dbPort +" user="+dbUser+" dbname="+dbName+" password="+dbPassword+" sslmode=disable")
 }
