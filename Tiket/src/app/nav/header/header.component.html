@@ -1,4 +1,4 @@
-<header>
+<header (click)="closeDropdown()">
     <div class="top">
         <div class="left-top">
             <a href="#" class="def-items"> Unduh Aplikasi tiket.com </a>
@@ -6,10 +6,38 @@
             <a href="#" class="def-items"> Pusat Bantuan </a>
         </div>
         <div class="right-top">
-            <div class="current">
-                <a href="caret"></a>
-                
-            </div>
+            <!-- <div class="current">
+                <button (click)="dropCurrency()" class="caret">&or;</button>
+                <ul id="currency" class="{{ currency }}">
+                    <li><a href="#">IDR - Rupiah Indonesia</a></li>
+                    <li><a href="#">USD</a></li>
+                </ul>
+            </div> -->
+            <ul>
+                <li class="current">
+                    <img src="{{ lang }}">
+                    <button (click)="drop($event)">&or;</button>
+                    <ul class="drop">
+                        <li>
+                            <img src="../../../assets/Nav/flag-en.png">
+                            <a href="#"> English </a>
+                        </li>
+                        <li>
+                            <img src="../../../assets/Nav/flag-indo.png">
+                            <a href="#"> Bahasa Indonesia </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="current">
+                    {{currency}}
+                    <button (click)="drop($event)">&or;</button>
+                    <ul class="drop">
+                        <li><a href="#"> IDR - Indonesian Rupiah</a></li>
+                        <li><a href="#"> USD - US Dollar </a></li>
+                        <li><a href="#"> SGD - Singapore Dollar </a></li>
+                    </ul>
+                </li>
+            </ul>
             
             <!-- &and; -->
         </div>
@@ -31,7 +59,7 @@
         <div class="right-items-container">
             <a href="#" class="right-items"> Tix Point </a>
             <a href="#" class="right-items"> Cek Order </a>
-            <a href="#" class="right-items"> Login </a>
+            <a (click)="onLogin()" class="right-items"> Login </a>
             <a href="#" class="abutton"> Daftar </a>
         </div>
 

@@ -30,12 +30,69 @@
 .def-items{
     @extend %items;
 }
-.caret{
-    // content: "asdaasdasdasdasdasdasd";
-    &:before{
-        content: "asdaasdasdasdasdasdasd";
+
+.right-top{
+    width:10vw;
+    font-size: 1vw;
+    ul{
+        list-style-type: none;
+        display:flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        .current{
+            img{
+                width:2vw;
+                height:1.3vw;
+                padding-right:0.5vw;
+                object-fit:cover;
+            }
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            
+            .drop{
+                top:2vw;
+                right:0;
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                width: 15vw;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+                align-items: center;
+                
+                li{
+                    width:90%;
+                    padding: 0.5vw;
+                    display:flex;
+                    align-items:center;
+                    
+                }
+            }
+            .show{
+                display:flex;
+                flex-direction:column;
+            }
+        }
     }
+    button{
+        border: none;
+        background: transparent;
+        transform: scaleX(1.8);
+        padding: 0 0.3vw 0 0.5vw;
+        color: gray;
+        outline: none;
+        cursor: pointer;
+        &:focus{
+            transform: rotate(180deg) scaleX(1.9);
+            transition: 1.5s;
+        }
+    }
+   
 }
+
 .head{
     @extend %config;
     height:6%;

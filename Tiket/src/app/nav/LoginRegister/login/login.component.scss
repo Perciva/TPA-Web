@@ -1,0 +1,80 @@
+.container{
+    font-family: Helvetica;
+    font-size: 13px;
+    width: 200px;
+    height:300px;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    .title{
+        font-weight: 500;
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+    input[type=text]{
+        margin: 10px 0;
+        padding: 10px;
+        margin-top:30px;
+    }
+    .next{
+        margin-top: 10px;
+        font-size: 15px;
+        background-color: rgb(255, 208, 0);
+        padding: 10px 2px;
+        color: blue;
+        border-radius:19px;
+        border: none;
+    }
+    .login-or{
+        // border: 1px solid black;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        font-size:10px;
+
+        .or{
+            color:gray;
+            position: relative;
+            padding: 10px 10px;
+        }
+    }
+    .socmed{
+        border:1px solid rgb(199, 195, 195);
+        display:flex;
+        justify-content: center;
+        flex-direction: column;
+        button{
+            cursor: pointer;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: white;
+            &:hover{
+                background-color: gainsboro;
+                transition: 0.5s;
+            }
+
+            display: flex;
+            align-items: center;
+            img{
+                height:20px;
+                width: 20px;
+                padding-left: 8px;
+            }
+            label{
+                padding-left:15px;
+            }
+        }
+        .hr{
+            background: #dee2ee;
+            height: 1px;
+            margin: 0 16px;
+        }
+    }
+    p{
+        margin-top:5px;
+        font-size:9px;
+        text-align: center;
+    }
+}
