@@ -7,7 +7,7 @@ import (
 )
 
 func main(){
-	fmt.Print("Hello")
+	fmt.Print("Hello world")
 
 	db,err:= Connection.Connect()
 	if err != nil{
