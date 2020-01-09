@@ -1,6 +1,7 @@
 package Connection
 
 import(
+	"fmt"
 	"github.com/jinzhu/gorm"
 	_"github.com/jinzhu/gorm/dialects/postgres"
 
@@ -13,5 +14,6 @@ const dbUser = "postgres"
 const dbPassword = ""
 
 func Connect()(*gorm.DB, error){
+	fmt.Println("???????")
 	return gorm.Open("postgres","host=" + dbHost+" port="+dbPort +" user="+dbUser+" dbname="+dbName+" password="+dbPassword+" sslmode=disable")
 }
