@@ -1,6 +1,11 @@
 package Connection
 
-import "github.com/jinzhu/gorm"
+import(
+	"fmt"
+	"github.com/jinzhu/gorm"
+	_"github.com/jinzhu/gorm/dialects/postgres"
+
+)
 
 const dbName = "TPAWeb"
 const dbHost = "127.0.0.1"
