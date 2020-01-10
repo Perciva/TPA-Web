@@ -2,7 +2,7 @@ import { ApolloService } from './../../../Services/apollo.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider ,SocialUser} from "angularx-social-login";
-
+import {Query} from '../../../Services/apollo.service'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,7 +11,7 @@ import { FacebookLoginProvider, GoogleLoginProvider ,SocialUser} from "angularx-
 export class LoginComponent implements OnInit {
   private user: SocialUser;
   private loggedIn: boolean;
-  private userInput:string = "Hewo"
+  private userInput:string;
 
   constructor( 
     private auth:AuthService,
@@ -32,6 +32,11 @@ export class LoginComponent implements OnInit {
   }
 
   signIn():void{
-    console.log(this.userInput)
+    this.userInput=(<HTMLInputElement>document.getElementById('sign')).value;
+    this.apollo.searchUserByEmailPhone(this.userInput).subscribe(
+      Query=>{
+        this.userInput = Query.data.searchuseremailphone
+      }
+    )
   }
 }
