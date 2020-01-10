@@ -1,3 +1,4 @@
+import { ApolloService } from './../../../Services/apollo.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider ,SocialUser} from "angularx-social-login";
@@ -10,9 +11,13 @@ import { FacebookLoginProvider, GoogleLoginProvider ,SocialUser} from "angularx-
 export class LoginComponent implements OnInit {
   private user: SocialUser;
   private loggedIn: boolean;
-  constructor( private auth:AuthService) { }
+  private userInput:string = "Hewo"
 
-  
+  constructor( 
+    private auth:AuthService,
+    private apollo: ApolloService
+    ) { }
+
   ngOnInit() {
     this.auth.authState.subscribe((user) => {
       this.user = user;
@@ -24,7 +29,9 @@ export class LoginComponent implements OnInit {
   }
   signInFB():void{
     this.auth.signIn(FacebookLoginProvider.PROVIDER_ID)
-    console.log("Luis");
   }
 
+  signIn():void{
+    console.log(this.userInput)
+  }
 }
