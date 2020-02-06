@@ -1,1 +1,25 @@
-<p>register works!</p>
+<div class="container">
+    <div class="title">Daftar</div>
+
+    <label class="email">email</label>
+    <input class="read-only" type="text" value="{{data.data}}" readonly>
+    <input type="text"id="fname" placeholder="Nama Depan" (focus)="remo('fname')">
+    <input type="text" id="lname" placeholder="Nama Belakang">
+    
+    <div class="row">
+        <select class="select" id="select">
+            <Option value="+62" label="+62">Indonesia (+62)</Option>
+            <Option value="+43" label="+43">Austria (+43)</Option>
+        </select>
+        <input id="phone" type="text"class="phone" placeholder="Nomor Ponsel" (focus)="remo('phone')">
+    </div>
+    <div class="row">
+        <input type="password" id="pass" class="text" placeholder = "Kata Sandi"(focus)="remo('pass')">
+        <img id="img" src="../../../../assets/Nav/login/visible.png" (click)="togle()">
+    </div>
+    <label class="note">min. 7 karakter dengan kombinasi antara angka, simbol, & huruf kapital.</label>
+
+    <label class="errmsg" id="err">{{message}}</label>
+
+    <button class="next" (click)="register()">BUAT AKUN</button>
+</div>

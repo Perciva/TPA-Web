@@ -18,20 +18,15 @@ type User struct{
 }
 
 func init(){
-	db,err := Connection.Connect()
-	if err!=nil{
-		panic("Database failed to connect:  " + err.Error())
-	}
+	db := Connection.Connect()
 
 	db.AutoMigrate(&User{})
 
 }
 
 func CreateUser(fname string, lname string, password string, email string, phone string)(*User, error){
-	db,err := Connection.Connect()
-	if err !=nil{
-		return nil,err
-	}
+	db := Connection.Connect()
+
 	defer db.Close()
 
 	var user = User{
@@ -47,25 +42,20 @@ func CreateUser(fname string, lname string, password string, email string, phone
 
 	return &user, nil
 }
-func GetAllUser()([]User,error){
-	db,err := Connection.Connect()
-	if err !=nil{
-		return nil,err
-	}
+func GetAllUser()([]User){
+	db := Connection.Connect()
 	defer db.Close()
 
 	var users []User
 
 	db.Find(&users)
 
-	return users,nil
+	return users
 }
 
-func GetUserByEmailOrPhone(arg string)([]User, error){
-	db,err := Connection.Connect()
-	if err !=nil{
-		return nil,err
-	}
+func GetUserByEmailOrPhone(arg string)([]User){
+	db := Connection.Connect()
+
 	defer db.Close()
 
 	var user []User
@@ -74,5 +64,5 @@ func GetUserByEmailOrPhone(arg string)([]User, error){
 		return nil, nil
 	}
 
-	return user,nil
+	return user
 }

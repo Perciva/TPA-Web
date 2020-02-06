@@ -10,6 +10,8 @@ import {User} from '../Models/user'
 export class ApolloService {
 
   constructor(private apollo: Apollo) { }
+  
+  
   //select all
   selectAllUser():Observable<Query>{
     return this.apollo.query<Query>({
@@ -48,9 +50,9 @@ export class ApolloService {
   }
 
   //CRUD
-  createUser(newUser:User):Observable<Query>{
-    return this.apollo.query<Query>({
-      query:gql`
+  createUser(newUser:User){
+    return this.apollo.mutate({
+      mutation:gql`
         mutation createuser(
           $firstname:String,
           $lastname:String,
@@ -69,11 +71,11 @@ export class ApolloService {
           }
         }`,
         variables:{
-          "firstname" : newUser.firstname,
-          "lastname" : newUser.lastname,
-          "email" : newUser.email,
-          "phone" : newUser.phone,
-          "password" : newUser.password
+          "firstname" : newUser.getFirstname(),
+          "lastname" : newUser.getLastname(),
+          "email" : newUser.getEmail(),
+          "phone" : newUser.getPhone(),
+          "password" : newUser.getPassword()
         }
     })
   }

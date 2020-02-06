@@ -2,7 +2,10 @@
     <label class="title">Log in/Daftar</label>
     Perjalanan serumu dimulai disini.
     
-    <input id="sign" type="text" placeholder="Nomor Ponsel atau Email">
+    <input id="sign" [value]="userInput" (blur)="userInput = $event.target.value"  (blur) = "validate()" (focus) = "message = ''" (focus) = "err()" type="text"  placeholder="Nomor Ponsel atau Email">
+
+    <label class="errmsg" id="err">{{message}}</label>
+
     <button class="next" (click) = "signIn()">LANJUTKAN</button>
 
     <div class="login-or">
@@ -21,13 +24,18 @@
             <label>Facebook</label>
         </button>
     </div>
-    <div *ngIf="user">
-        <img src="{{ user.photoUrl }}">
-        <div>
-        <h4>{{ user.name }}</h4>
-        <p>{{ user.email }}</p>
-        </div>
-    </div>
+    <!-- <div *ngIf="user"> -->
+        <!-- <img src="{{ user.photoUrl }}"> -->
+        <!-- <div> -->
+        <!-- <h4>{{ user.name }}</h4> -->
+        <!-- <h4>{{ user.idToken }}</h4> -->
+        <!-- <h4>{{ user.authToken }}</h4> -->
+        <!-- <h4>{{ user.facebook }}</h4> -->
+        
+        <!-- <h4>{{ user.provider }}</h4> -->
+        <!-- <p>{{ user.email }}</p> -->
+        <!-- </div> -->
+    <!-- </div> -->
     <p>
         Dengan mendaftar kamu menyetujui Kebijakan Privasi
          dan Syarat & Ketentuan kami.

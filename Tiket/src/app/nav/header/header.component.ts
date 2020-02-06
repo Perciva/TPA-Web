@@ -1,6 +1,7 @@
 import { LoginComponent } from './../LoginRegister/login/login.component';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { RegisterComponent } from '../LoginRegister/register/register.component';
 
 @Component({
   selector: 'app-header',
@@ -16,6 +17,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
 
   }
+  private refLogin:MatDialogRef<LoginComponent>
+  private refRegister: MatDialogRef<RegisterComponent>
   lang:string = "../../../assets/Nav/flag-en.png"
   currency:string="IDR"
 
@@ -39,6 +42,13 @@ export class HeaderComponent implements OnInit {
 
   onLogin(){
     
-    this.dialog.open(LoginComponent)
+    this.refLogin = this.dialog.open(LoginComponent, {disableClose:false})
+
+    this.refLogin.afterClosed().subscribe(temp =>{
+      if(temp){
+        console.log(temp)
+        this.dialog.open(RegisterComponent,{data:temp} )
+      }
+    })
   }
 }
