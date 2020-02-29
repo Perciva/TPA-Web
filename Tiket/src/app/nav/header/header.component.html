@@ -59,8 +59,11 @@
         <div class="right-items-container">
             <a href="#" class="right-items"> Tix Point </a>
             <a href="#" class="right-items"> Cek Order </a>
-            <a (click)="onLogin()" class="right-items"> Login </a>
-            <a href="#" class="abutton"> Daftar </a>
+            <!-- <div *ngIf="this.userData == -1"> -->
+            <a *ngIf="this.userData == -1" (click)="onLogin()" class="right-items"> Login </a>
+            <a *ngIf="this.userData == -1" (click)="onRegis()" class="abutton"> Daftar </a>
+            <!-- </div> -->
+            <a *ngIf="this.userData > -1" href="#" class="right-items">Profile</a>
         </div>
 
     </div>

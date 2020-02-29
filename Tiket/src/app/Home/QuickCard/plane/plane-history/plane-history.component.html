@@ -1,0 +1,8 @@
+<div class="container">
+    <label class="title"> Search History </label>
+    <div class="content" *ngFor="let item of historyData; let z = index" (click)="passData(z)">
+        <div>{{historyData[z].plane.from}} - {{historyData[z].plane.to}}</div>
+        <div>{{historyData[z].plane.start | date: 'shortDate'}} - {{historyData[z].plane.end | date: 'shortDate'}}</div>
+        <div>{{historyData[z].plane.people}} People In {{historyData[z].plane.class}} Class</div>
+    </div>
+</div>

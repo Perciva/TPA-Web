@@ -1,0 +1,76 @@
+<div class="container">
+    <mat-form-field>
+        <input matInput type="text" id="name" placeholder="Hotel Name">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="text" id="img" placeholder="Hotel Image Name">
+    </mat-form-field>
+    
+    <mat-form-field >
+        <input  matInput type="text"id="city" placeholder="Hotel Located in City">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput type="number"id="rating" placeholder="rating">
+
+    </mat-form-field>
+
+    <div class="latlong">
+        <mat-form-field style="width: 7vw;">
+            <input matInput type="number" id="lat" placeholder="Latitude">
+    
+        </mat-form-field>
+    
+        <mat-form-field >
+            <input matInput type="number" id="long"placeholder="Longitude">
+    
+        </mat-form-field>
+    </div>
+
+    <mat-form-field>
+        <input matInput type="number" id="price" placeholder="Price">
+
+    </mat-form-field>
+
+    <mat-form-field>
+        <textarea matInput id="address" cols="30" rows="3"placeholder="Address"></textarea>
+
+    </mat-form-field>
+
+    <mat-form-field>
+        <textarea matInput id="desc" cols="30" rows="3"placeholder="Description"></textarea>
+       
+    </mat-form-field>
+    
+    <mat-form-field >
+        <mat-chip-list #chiptypeList aria-label="Hotel Room Types">
+            <mat-chip *ngFor="let h of hotelTypes" [selectable]="selectable"
+                    [removable]="removable" (removed)="removeType(h)">
+            {{h.name}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="Hotel Room Types"
+                    [matChipInputFor]="chiptypeList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="addType($event)">
+        </mat-chip-list>
+    </mat-form-field>
+
+    <mat-form-field >
+        <mat-chip-list #chipfacilityList aria-label="Hotel Facilities">
+            <mat-chip *ngFor="let h of hotelFacilities" [selectable]="selectable"
+                    [removable]="removable" (removed)="removeFacility(h)">
+            {{h.name}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="Add Facility"
+                    [matChipInputFor]="chipfacilityList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="addFacility($event)">
+        </mat-chip-list>
+    </mat-form-field>
+    <label class="errmsg" id="err">{{error}}</label>
+    <button mat-raised-button color="Primary"(click)="insert()">Insert</button>
+</div>

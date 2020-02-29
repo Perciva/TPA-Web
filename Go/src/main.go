@@ -36,7 +36,7 @@ func main(){
 		Query: query.GetRoot(),
 		Mutation: mutation.GetRoot(),
 	})
-	// tai
+
 
 	if err != nil{
 		panic(err.Error())
@@ -51,7 +51,8 @@ func main(){
 
 	tes := SetCORS(h)
 
-	log.Fatal(http.ListenAndServe(":4201",tes))
+	//models.InLoc()
+	log.Fatal(http.ListenAndServe(":4100",tes))
 	//router := router.NewRouter()
 	//router.HandleFunc("/api",Cors)
 	//router.Handle("/",h)

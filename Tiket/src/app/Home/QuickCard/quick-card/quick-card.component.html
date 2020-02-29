@@ -1,0 +1,32 @@
+<div class="quick">
+    <div class="header">
+        <div class="left">
+            <label>Hey, Kamu</label>
+            <label class="big">Mau ke Mana?</label>
+        </div>
+    
+        <div class="right">
+            <img id="imgPlane" (click)="clickHead('imgPlane')" src="../../../assets/Quick_Card/plane.png">
+            <img id="imgHotel" (click)="clickHead('imgHotel')" src="../../../assets/Quick_Card/hotel.png">
+            <img id="imgTrain" (click)="clickHead('imgTrain')" src="../../../assets/Quick_Card/train.png">
+            <img id="imgCar" (click)="clickHead('imgCar')" src="../../../assets/Quick_Card/car.png">
+            <img id="imgEnt" (click)="clickHead('imgEnt')" src="../../../assets/Quick_Card/entertainment.png">
+        </div>
+    </div>
+    <div *ngIf="previousID=='imgPlane'">
+        <app-plane></app-plane>
+    </div>
+    <div *ngIf="previousID=='imgHotel'">
+        <app-hotel></app-hotel>
+    </div>
+    <div *ngIf="previousID=='imgTrain'">
+        <app-train></app-train>
+    </div>
+    <div *ngIf="previousID=='imgCar'">
+        <app-car></app-car>
+    </div>
+    <div *ngIf="previousID=='imgEnt'">
+        <app-entertainment></app-entertainment>
+    </div>
+
+</div>

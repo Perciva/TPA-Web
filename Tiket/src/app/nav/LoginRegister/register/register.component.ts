@@ -3,7 +3,6 @@ import { User } from './../../../Models/user';
 import { Subscription } from 'rxjs';
 import { Component, OnInit, ComponentFactoryResolver, Inject } from '@angular/core';
 import { ApolloService } from './../../../Services/apollo.service';
-import { inject } from '@angular/core/testing';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 @Component({
   selector: 'app-register',
@@ -13,7 +12,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 export class RegisterComponent implements OnInit {
   private img:boolean = false;//if false -> invisible
   private message:string = "tes";
-  
+  private disable:boolean = false;
 
   constructor(
     private apollo: ApolloService,
@@ -22,7 +21,17 @@ export class RegisterComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.data)
+    console.log(this.disable)
+    if(this.data){
+      if(this.data.length != 0 && this.data != null){
+        this.disable = true;
+        document.getElementById("mail").classList.add("read-only");
+        (<HTMLInputElement>document.getElementById("mail")).value = this.data.data
+      }
+    }
+  }
+  ngOnDestroy(): void {
+    this.regis$.unsubscribe()
   }
 
   togle():void{
@@ -88,11 +97,11 @@ export class RegisterComponent implements OnInit {
   register():void{
     var fname:string =(<HTMLInputElement>document.getElementById('fname')).value;
     var lname:string =(<HTMLInputElement>document.getElementById('lname')).value;
-    var temp = <HTMLSelectElement>document.getElementById('select')
+    var temp = <HTMLSelectElement>document.getElementById('select');
     var countrycode:string =temp.options[temp.selectedIndex].value;
     var pass:string =(<HTMLInputElement>document.getElementById('pass')).value;
     var phone:string =(<HTMLInputElement>document.getElementById('phone')).value;
-    
+    // auth2.disconect();
     if(fname.length == 0){
       this.message = "first name should not be empty!"
       this.err('fname')
@@ -112,7 +121,7 @@ export class RegisterComponent implements OnInit {
 
         this.regis$ = this.apollo.createUser(user).subscribe(({data}) => {
           console.log(data)
-          this.ref.close()
+          // this.ref.close()
         })
       }
     }

@@ -1,0 +1,55 @@
+<div class="labels">
+
+    <div style="margin-left:1vw; font-weight: 500;font-size:25px">
+        Cari harga tiket pesawat murah & promo disini
+    </div>
+    
+    <div style="font-size:15px;color:blue;cursor:pointer;" (click)="openHistory = !openHistory">
+        Pencarian Terakhir >
+    </div>
+</div>
+<div *ngIf="openHistory">
+    <app-plane-history (data) = "rcvData($event)"></app-plane-history>
+</div>
+
+<mat-radio-group class="radio-group" [(ngModel)]="radio" >
+    <mat-radio-button value="sj">Sekali Jalan</mat-radio-button>
+    <mat-radio-button value="pp">Pulang Pergi</mat-radio-button>
+</mat-radio-group>
+
+<div class="container">
+    <div class="box">
+        <label for="from">Dari</label>
+        <input id="from" type="text" placeholder="Mau Ke Mana?" id="from">
+    </div>
+    <div class="box">
+        <label for="dest">Ke</label>
+        <input id="dest" type="text" placeholder="Mau Ke Mana?" id="to">
+    </div>
+    <div class="box">
+       <label for="">Berangkat</label>
+       <mat-form-field>
+           <mat-label>Choose a date</mat-label>
+           <input matInput [matDatepicker]="berangkatDate" id="berangkat">
+           <mat-datepicker-toggle matSuffix [for]="berangkatDate"></mat-datepicker-toggle>
+           <mat-datepicker #berangkatDate></mat-datepicker>
+       </mat-form-field>
+    </div>
+    <div class="box" >
+        <label for="">Pulang</label>
+        <mat-form-field *ngIf="this.radio == 'pp'">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="pulangDate" id="pulang" >
+            <mat-datepicker-toggle matSuffix [for]="pulangDate"></mat-datepicker-toggle>
+            <mat-datepicker #pulangDate></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="box">
+        <label for="pclass">Penumpang & Kelas Kabin</label>
+        <input id="pclass" type="text" placeholder="berapa orang? kelas apa?">
+    </div>
+</div>
+
+<div class="buton" >
+    <button (click)="searchPlane()" align="right">Cari Penerbangan</button>
+</div>

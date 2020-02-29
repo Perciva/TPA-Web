@@ -1,0 +1,53 @@
+<div class="labels">
+
+    <div style="margin-left:1vw; font-weight: 500;font-size:25px">
+        Cari harga tiket pesawat murah & promo disini
+    </div>
+    
+    <div style="font-size:15px;color:blue;cursor:pointer;">
+        Pencarian Terakhir >
+    </div>
+</div>
+
+
+<mat-radio-group class="radio-group">
+    <mat-radio-button value="sj">Sekali Jalan</mat-radio-button>
+    <mat-radio-button value="pp">Pulang Pergi</mat-radio-button>
+</mat-radio-group>
+
+<div class="container">
+    <div class="box">
+        <label for="from">Dari</label>
+        <input id="from" type="text" placeholder="Kota atau stasiun">
+    </div>
+    <div class="box">
+        <label for="dest">Ke</label>
+        <input id="dest" type="text" placeholder="Mau Ke Mana?">
+    </div>
+    <div class="box">
+       <label for="">Berangkat</label>
+       <mat-form-field>
+           <mat-label>Choose a date</mat-label>
+           <input matInput [matDatepicker]="berangkatDate">
+           <mat-datepicker-toggle matSuffix [for]="berangkatDate"></mat-datepicker-toggle>
+           <mat-datepicker #berangkatDate></mat-datepicker>
+       </mat-form-field>
+    </div>
+    <div class="box">
+        <label for="">Pulang</label>
+        <mat-form-field>
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="pulangDate">
+            <mat-datepicker-toggle matSuffix [for]="pulangDate"></mat-datepicker-toggle>
+            <mat-datepicker #pulangDate></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="box">
+        <label for="pclass">Penumpang </label>
+        <input id="pclass" type="text" placeholder="Dewasa Bayi">
+    </div>
+</div>
+
+<div class="buton" >
+    <button align="right"><h4>Cari Kereta Api</h4></button>
+</div>

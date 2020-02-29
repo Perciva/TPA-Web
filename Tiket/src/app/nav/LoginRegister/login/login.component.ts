@@ -1,3 +1,4 @@
+import { User } from './../../../Models/user';
 import { MatDialogRef } from '@angular/material';
 import { ApolloService } from './../../../Services/apollo.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,14 +15,14 @@ import { Query } from 'src/app/Models/query';
 })
 export class LoginComponent implements OnInit {
   private user: SocialUser;
-  private loggedIn: boolean;
+  private log: boolean=false;
   private userInput:string;
   private nvalid:boolean = false;
   private message:string;
   private len:number 
   private data:any
-
-
+  private img:boolean = false;
+  regis$: Subscription;
   constructor( 
     private auth:AuthService,
     private apollo: ApolloService,
@@ -31,13 +32,15 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.auth.authState.subscribe((user) => {
       this.user = user;
-      this.loggedIn = (user != null);
+
     });
+    this.userInput=""
   }
   close():void{
     this.ref.close({
       fromModal : true,
-      data : this.data
+      data : this.data,
+      logged : this.nvalid
     })
   }
   err():void{
@@ -54,7 +57,7 @@ export class LoginComponent implements OnInit {
     for(let i:number = 0;i<this.len;i++){
       if(this.userInput.charAt(i)=='@'){
         flag=i
-        console.log(flag)
+        // console.log(flag)
       }
       if(flag < i && this.userInput.charAt(i) == "."){
         return (i < this.len+1)
@@ -80,34 +83,97 @@ export class LoginComponent implements OnInit {
   }
   signInGoogle():void{
     this.auth.signIn(GoogleLoginProvider.PROVIDER_ID)
+    this.loginFromSocMed()
   }
   signInFB():void{
     this.auth.signIn(FacebookLoginProvider.PROVIDER_ID)
-
-    console.log(this.user.facebook)
+    this.loginFromSocMed()
+    // console.log(this.user.facebook)
   }
-
+  loginFromSocMed(){
+    if(this.user){
+      var email:string = this.user.email
+      this.userInput$=this.apollo.searchUserByEmailPhone(email).subscribe(async query => {
+        await this.tes(query)
+    })
+    }
+  }
   userInput$: Subscription
-
+  
   signIn():void{
-    if(this.message.length ==0 && this.userInput.length != 0){
+    if(this.message.length ==0 && this.userInput.length != 0&&this.log==false){
+      this.log = true;
       this.userInput=(<HTMLInputElement>document.getElementById('sign')).value;
-
-      this.userInput$ = this.apollo.searchUserByEmailPhone(this.userInput).subscribe(async(Query) => {
-          await this.tes(Query)
+     
+      this.userInput$ = this.apollo.searchUserByEmailPhone(this.userInput).subscribe(async query => {
+          await this.tes(query)
       })
-      console.log(this.data)
-      if(this.data == null){
-        this.data = this.userInput
-      }
-      this.close()
-
+      
     } 
   }
-  tes(Query: Query) {
+
+  login():void{
+    var pass:string = (<HTMLInputElement>document.getElementById('pass')).value;
+    console.log("ooo: " + pass)
+    if(pass == this.data[0].password){
+      console.log('login')
+      this.setSess(this.data[0].id)
+    }
+    else{
+      this.message="incorrect email or password"
+    }
+  }
+
+  togle():void{
+    if(!this.img){
+      (<HTMLImageElement>document.getElementById('img')).src = "../../../../assets/Nav/login/invisible.png";
+      (<HTMLInputElement>document.getElementById('pass')).type = "text"
+    }
+    else{
+      (<HTMLImageElement>document.getElementById('img')).src = "../../../../assets/Nav/login/visible.png";
+      (<HTMLInputElement>document.getElementById('pass')).type = "password"
+    }
+    this.img = !this.img
+  }
+  ngOnDestroy(): void {
+    this.userInput$.unsubscribe()
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
     
-      this.data = Query.data.userbyemailphone
-      
-      console.log(this.data)  
+  }
+  tes(a: any) {
+    console.log(a.data.userbyemailphone.length);
+      this.data = a.data.userbyemailphone
+
+      if(this.data.length === 0){
+        if(this.user){
+          var newUser:User = new User(this.user.firstName, this.user.lastName, this.user.email, "" ,"")
+          // console.log(newUser)
+          this.regis$ = this.apollo.createUser(newUser).subscribe(async (d:any) => {
+            // console.log("registered"+ d)
+            this.setSess(d.data.createuser.id);   
+          })
+          
+          return;
+        }
+        else{
+          this.data = this.userInput
+          this.close()
+        }
+      }
+      else{
+        if(this.user){
+          this.setSess(this.data[0].id);
+          return;
+        }
+        document.getElementById('passrow').classList.remove('hid')
+      }
+  }
+  setSess(val:number):void{
+          this.nvalid = true;
+
+    sessionStorage.setItem("logged","true")
+    sessionStorage.setItem("token", val.toString());
+    this.close();
   }
 }

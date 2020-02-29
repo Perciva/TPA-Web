@@ -1,0 +1,5 @@
+<div class = "slider-container">
+    <div *ngFor="let curr of imageUrls; let i = index">
+        <img class="slider" *ngIf="i == idx" [@slider] = curr src="{{curr}}">
+    </div>
+</div>

@@ -4,12 +4,16 @@
     
     <input id="sign" [value]="userInput" (blur)="userInput = $event.target.value"  (blur) = "validate()" (focus) = "message = ''" (focus) = "err()" type="text"  placeholder="Nomor Ponsel atau Email">
 
+    <div class="row hid" id="passrow">
+        <input type="password" (focus) = "message = ''" (focus) = "err()" id="pass" class="text" placeholder = "Kata Sandi">
+        <img id="img" src="../../../../assets/Nav/login/visible.png" (click)="togle()">
+    </div>
+    
     <label class="errmsg" id="err">{{message}}</label>
 
-    <button class="next" (click) = "signIn()">LANJUTKAN</button>
+    <button class="next" (click) = "log?login():signIn()">LANJUTKAN</button>
 
     <div class="login-or">
-        
         <label class="or">atau dengan</label>
     </div>
 

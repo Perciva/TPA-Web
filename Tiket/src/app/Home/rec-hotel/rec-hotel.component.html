@@ -1,0 +1,32 @@
+<div class="container">
+    <label class="title">Recommended Hotels</label>
+    <div class="placeholderContainer" *ngIf="hotelList==null">
+        <ngx-content-loading 
+            [speed]="'1900ms'"
+            [width]="1760"
+            [height]="700"
+            [primaryColor]="'#363636'"
+            [secondaryColor]="'#5e5e5e'" >
+                <svg:g ngx-rect width="400" height="300" y="10" x="5" rx="5" ry="5"></svg:g>
+                <svg:g ngx-rect width="400" height="300" y="10" x="455" rx="5" ry="5"></svg:g>
+                <svg:g ngx-rect width="400" height="300" y="10" x="905" rx="5" ry="5"></svg:g>
+                <svg:g ngx-rect width="400" height="300" y="10" x="1350" rx="5" ry="5"></svg:g>
+                <svg:g ngx-rect width="400" height="300" y="360" x="5" rx="5" ry="5"></svg:g>
+                <svg:g ngx-rect width="400" height="300" y="360" x="455" rx="5" ry="5"></svg:g>
+                <svg:g ngx-rect width="400" height="300" y="360" x="905" rx="5" ry="5"></svg:g>
+                <svg:g ngx-rect width="400" height="300" y="360" x="1350" rx="5" ry="5"></svg:g>
+        </ngx-content-loading>
+    </div>
+    <div class=loadedContainer>
+        <div *ngFor="let item of hotelList" class="box">
+            <div *ngIf="item.photo.length>0">
+
+                <img src="{{path}}{{item.photo[0].path}}">
+            </div>
+            <label>{{item.name}}</label>
+            <label>{{item.price}}</label>
+            <label>{{item.description}}</label>
+        </div>
+    </div>
+  
+</div>

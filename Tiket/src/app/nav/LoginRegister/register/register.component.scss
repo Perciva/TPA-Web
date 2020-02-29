@@ -11,10 +11,12 @@
     }
     .read-only{
         border:none;
+        background-color: white;
+        pointer-events:none;
         // outline:none;
     }
     .title{
-        font-weight: 500;
+        font-weight: 500; 
         font-size: 18px;
         margin-bottom: 5px;
     }

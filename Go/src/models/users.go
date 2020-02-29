@@ -24,7 +24,7 @@ func init(){
 
 }
 
-func CreateUser(fname string, lname string, password string, email string, phone string)(*User, error){
+func CreateUser(fname string, lname string, password string, email string, phone string)(*User){
 	db := Connection.Connect()
 
 	defer db.Close()
@@ -40,7 +40,7 @@ func CreateUser(fname string, lname string, password string, email string, phone
 		db.Create(&user)
 	}
 
-	return &user, nil
+	return &user
 }
 func GetAllUser()([]User){
 	db := Connection.Connect()
@@ -61,7 +61,7 @@ func GetUserByEmailOrPhone(arg string)([]User){
 	var user []User
 
 	if db.Where("email = ?", arg).Or("Phone = ?", arg).Find(&user).RecordNotFound(){
-		return nil, nil
+		return nil
 	}
 
 	return user
