@@ -23,8 +23,7 @@ export class EventDetailComponent implements OnInit {
     this.apollo.selectEventById(parseInt(a.id)).subscribe(async a=>{
       console.log(a)
     })
-  }
-
+  }//demi branch
   ngOnInit() {
   }
 
