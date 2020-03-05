@@ -14,7 +14,7 @@
                 </ul>
             </div> -->
             <ul>
-                <div id="google_translate_element"></div>
+                <!-- <div id="google_translate_element"></div> -->
                 <!-- <li class="current">
                     <img src="{{ lang }}">
                     <button (click)="drop($event)">&or;</button>
@@ -61,10 +61,10 @@
             <a href="#" class="right-items"> Tix Point </a>
             <a href="#" class="right-items"> Cek Order </a>
             <!-- <div *ngIf="this.userData == -1"> -->
-            <a *ngIf="this.userData == -1" (click)="onLogin()" class="right-items"> Login </a>
-            <a *ngIf="this.userData == -1" (click)="onRegis()" class="abutton"> Daftar </a>
+            <a *ngIf="!checkSess()" (click)="onLogin()" class="right-items"> Login </a>
+            <a *ngIf="!checkSess()" (click)="onRegis()" class="abutton"> Daftar </a>
             <!-- </div> -->
-            <a *ngIf="this.userData > -1" href="#" class="right-items">Profile</a>
+            <a *ngIf="checkSess()" (click)="popProfile()" href="#" class="right-items">Profile</a>
         </div>
 
     </div>

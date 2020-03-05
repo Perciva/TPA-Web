@@ -138,6 +138,39 @@ func GetRoot() *graphql.Object{
 					},
 				},
 			},
+			"updateuser":{
+				Type:types.GetUserType(),
+				Resolve:Resolver.UpdateUser,
+				Args:graphql.FieldConfigArgument{
+					"id": &graphql.ArgumentConfig{
+						Type: graphql.Int,
+					},
+					"firstname": &graphql.ArgumentConfig{
+						Type: graphql.String,
+					},
+					"lastname": &graphql.ArgumentConfig{
+						Type: graphql.String,
+					},
+					"email": &graphql.ArgumentConfig{
+						Type: graphql.String,
+					},
+					"kode_pos": &graphql.ArgumentConfig{
+						Type: graphql.String,
+					},
+					"title": &graphql.ArgumentConfig{
+						Type: graphql.String,
+					},
+					"address": &graphql.ArgumentConfig{
+						Type: graphql.String,
+					},
+					"phone": &graphql.ArgumentConfig{
+						Type: graphql.String,
+					},
+					"languange": &graphql.ArgumentConfig{
+						Type: graphql.String,
+					},
+				},
+			},
 			"createhoteltype":{
 				Type: types.GetHotelTypeType(),
 				Resolve:Resolver.CreateHotelType,
@@ -166,6 +199,9 @@ func GetRoot() *graphql.Object{
 					"arrival": &graphql.ArgumentConfig{
 						Type: graphql.String,
 					},
+					"class": &graphql.ArgumentConfig{
+						Type: graphql.String,
+					},
 					"arrivalTime": &graphql.ArgumentConfig{
 						Type: graphql.String,
 					},
@@ -183,18 +219,6 @@ func GetRoot() *graphql.Object{
 					},
 					"price": &graphql.ArgumentConfig{
 						Type: graphql.Int,
-					},
-				},
-			},
-			"createtrainclass": &graphql.Field{
-				Type: types.GetTrainClassType(),
-				Resolve: Resolver.InsertTrainClass,
-				Args: graphql.FieldConfigArgument{
-					"trainId": &graphql.ArgumentConfig{
-						Type: graphql.Int,
-					},
-					"name": &graphql.ArgumentConfig{
-						Type: graphql.String,
 					},
 				},
 			},

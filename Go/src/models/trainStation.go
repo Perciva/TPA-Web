@@ -33,6 +33,9 @@ func GetAllTrainStation() []TrainStation {
 	defer db.Close()
 
 	var trainStation []TrainStation
+	if ValidateKey() == false {
+		return trainStation
+	}
 	db.Find(&trainStation)
 
 	for i, _ := range trainStation {
@@ -115,6 +118,9 @@ func SearchTrainStationByName(name string) TrainStation {
 	defer db.Close()
 
 	var trainStation TrainStation
+	if ValidateKey() == false {
+		return trainStation
+	}
 	db.
 		Where("name = ?", name).
 		First(&trainStation)

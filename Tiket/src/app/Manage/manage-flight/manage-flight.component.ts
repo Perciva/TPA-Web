@@ -4,6 +4,7 @@ import { MatDialogRef, MatDialog, MatPaginator, MatSort, MatTableDataSource } fr
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { ApolloService } from 'src/app/Services/apollo.service';
 import { InsertFlightComponent } from './insert-flight/insert-flight.component';
+import { ChatServiceService } from 'src/app/Services/chat-service.service';
 
 @Component({
   selector: 'app-manage-flight',
@@ -19,7 +20,7 @@ export class ManageFlightComponent implements OnInit {
   private path:string
   private refInsert:MatDialogRef<InsertFlightComponent>
   private refDelete:MatDialogRef<ConfirmDialogComponent>
-  constructor(private apollo: ApolloService, private dialog: MatDialog) { }
+  constructor(private chat:ChatServiceService,private apollo: ApolloService, private dialog: MatDialog) { }
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sorter: MatSort;
@@ -89,6 +90,7 @@ export class ManageFlightComponent implements OnInit {
     this.refInsert = this.dialog.open(InsertFlightComponent)
     this.refInsert.afterClosed().subscribe(data =>{
       if(data.fromModal== true){
+        this.chat.emit("flight","reload dong")
         this.getInitData()
       }
     })

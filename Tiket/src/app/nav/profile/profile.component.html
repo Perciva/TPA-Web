@@ -1,0 +1,37 @@
+<div class="container">
+    
+    <div class="contain">
+        Profile
+    
+        <mat-form-field>
+            <input matInput placeholder="First Name" value="User.firstname" [(ngModel)]="User.firstname">
+        </mat-form-field>
+    
+        <mat-form-field>
+            <input matInput placeholder="Last Name" value="User.lastname" [(ngModel)]="User.lastname">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Email" value="User.email" [(ngModel)]="User.email">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Title" value="User.title" [(ngModel)]="User.title">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Address" value="User.address" [(ngModel)]="User.address">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Kode Pos" value="User.kode_pos" [(ngModel)]="User.kode_pos">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="No HP" value="User.phone" [(ngModel)]="User.phone">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Languange" value="User.phone" [(ngModel)]="User.languange">
+        </mat-form-field>
+    
+        <button mat-raised-button (click)="update()" color="accent"> Save Changes </button>
+
+        <button mat-raised-button (click)="subscribe()"> SUBSCRIBE </button>
+    
+    </div>
+</div>

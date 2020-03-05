@@ -1,3 +1,6 @@
+import { ChatroomComponent } from './Product/chatroom/chatroom.component';
+import { PlaneSearchComponent } from './Product/main-plane/plane-search/plane-search.component';
+import { MainCarComponent } from './Product/main-car/main-car.component';
 
 import { HotelSearchComponent } from './Product/hotel/hotel-search/hotel-search.component';
 import { HotelDetailComponent } from './Product/hotel/hotel-detail/hotel-detail.component';
@@ -17,6 +20,9 @@ import { TrainSearchComponent } from './Product/main-train/train-search/train-se
 import { BlogDetailComponent } from './Product/main-blog/blog-detail/blog-detail.component';
 import { MainBlogComponent } from './Product/main-blog/main-blog.component';
 import { PromoComponent } from './Product/promo/promo.component';
+import { CarSearchComponent } from './Product/main-car/car-search/car-search.component';
+import { MainPlaneComponent } from './Product/main-plane/main-plane.component';
+import { ProfileComponent } from './nav/profile/profile.component';
 
 
 const routes: Routes = [
@@ -38,6 +44,8 @@ const routes: Routes = [
   },]},
   {path:'', component: HomePageComponent},
   {path:'Promo', component: PromoComponent},
+  {path:'Profile', component: ProfileComponent},
+  {path:'Chat', component: ChatroomComponent},
   {path:'Hotel', children:[{
     path:'Detail',
     component: HotelDetailComponent
@@ -67,6 +75,27 @@ const routes: Routes = [
   },{
     path:'',
     component: MainBlogComponent
+  },]},
+  {path:'Car', children:[{
+    path:'Search',
+    component: CarSearchComponent
+  },{
+    path:'',
+    component: MainCarComponent
+  },]},
+  {path:'Plane', children:[{
+    path:'Search',
+    component: PlaneSearchComponent
+  },{
+    path:'',
+    component: MainPlaneComponent
+  },]},
+  {path:'Event', children:[{
+    path:'Search',
+    component: PlaneSearchComponent
+  },{
+    path:'',
+    component: MainPlaneComponent
   },]}
 ];
 

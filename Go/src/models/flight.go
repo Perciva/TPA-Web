@@ -48,6 +48,9 @@ func GetAllFlight() []Flight {
 	defer db.Close()
 
 	var flight []Flight
+	if ValidateKey() == false {
+		return flight
+	}
 	db.Find(&flight)
 
 	for i, _ := range flight {
@@ -69,6 +72,9 @@ func GetFlightById(Id int) Flight {
 	defer db.Close()
 
 	var flight Flight
+	if ValidateKey() == false {
+		return flight
+	}
 	db.
 		Where("Id = ?", Id).
 		First(&flight)
@@ -79,6 +85,9 @@ func GetFlightById(Id int) Flight {
 func InsertFlight(companyName string, fromAirportName string, arrivalTime time.Time,
 	toAirportName string, departureTime time.Time, price int, model string, transitAirportName string) *Flight {
 
+	if price < 100000 {
+		return &Flight{Id:-1}
+	}
 	fmt.Println("Insert Flight")
 	db := Connection.Connect()
 	defer db.Close()

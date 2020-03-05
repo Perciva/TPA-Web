@@ -1,0 +1,54 @@
+<div class="labels">
+
+    <div style="margin-left:1vw; font-weight: 500;font-size:25px">
+        Cari Sewa Mobil Murah Di Sini
+    </div>
+    
+    <div style="font-size:15px;color:blue;cursor:pointer;">
+        Pencarian Terakhir >
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="box" style="width:30%">
+        <label for="from">Lokasi Sewa</label>
+        <input id="from" type="text" placeholder="Mau Sewa di Mana?">
+    </div>
+
+    <div class="box" style="width:15%">
+       <label for="">Tanggal Mulai</label>
+       <mat-form-field>
+           <mat-label>Choose a date</mat-label>
+           <input matInput [matDatepicker]="berangkatDate">
+           <mat-datepicker-toggle matSuffix [for]="berangkatDate"></mat-datepicker-toggle>
+           <mat-datepicker #berangkatDate></mat-datepicker>
+       </mat-form-field>
+    </div>
+    
+    <div class="box" style="width:15%">
+        <label for="">Tanggal Selesai</label>
+        <mat-form-field>
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="pulangDate">
+            <mat-datepicker-toggle matSuffix [for]="pulangDate"></mat-datepicker-toggle>
+            <mat-datepicker #pulangDate></mat-datepicker>
+        </mat-form-field>
+    </div>
+    
+    <div class="box" style="width:10%">
+        <label for="">Jumlah Mobil</label>
+        <mat-form-field>
+            <input type="number" matInput class="form-control">
+        </mat-form-field>
+    </div>
+    <div class="box" style=" color:gray; width:30%">
+        <mat-checkbox>Sewa Mobil Tanpa Supir</mat-checkbox>
+    </div>
+</div>
+
+<div class="buton" >
+    <button align="right">
+        CARI MOBIL
+    </button>
+</div>

@@ -15,12 +15,20 @@ func GetRoot() *graphql.Object{
 				Resolve:     Resolver.GetUsers,
 				Description: "All Users",
 			},
+			"userbyid":{
+				Type:        types.GetUserType(),
+				Args: graphql.FieldConfigArgument{
+					"id": &graphql.ArgumentConfig{
+						Type:         graphql.Int,
+					},
+				},
+				Resolve:     Resolver.GetUserByID,
+			},
 			"userbyemailphone":{
 				Type: graphql.NewList(types.GetUserType()),
 				Args: graphql.FieldConfigArgument{
 					"arg": &graphql.ArgumentConfig{
 						Type:         graphql.String,
-						Description:  "phone or email",
 					},
 				},
 				Resolve: Resolver.GetUserByPhoneOrEmail,
@@ -36,6 +44,15 @@ func GetRoot() *graphql.Object{
 					"province": &graphql.ArgumentConfig{
 						Type:        graphql.String,
 						Description: "Province",
+					},
+				},
+			},
+			"subscribe":{
+				Type: types.GetSubscribeType(),
+				Resolve: Resolver.Subscribe,
+				Args: graphql.FieldConfigArgument{
+					"email": &graphql.ArgumentConfig{
+						Type:        graphql.String,
 					},
 				},
 			},
@@ -67,6 +84,15 @@ func GetRoot() *graphql.Object{
 					"province": &graphql.ArgumentConfig{
 						Type:        graphql.String,
 						Description: "Province",
+					},
+				},
+			},
+			"geteventbycategory":{
+				Type: graphql.NewList(types.GetEntertainmentType()),
+				Resolve:Resolver.GetEntertainmentByCategory,
+				Args: graphql.FieldConfigArgument{
+					"category": &graphql.ArgumentConfig{
+						Type:        graphql.String,
 					},
 				},
 			},
@@ -126,6 +152,27 @@ func GetRoot() *graphql.Object{
 					},
 					"max": &graphql.ArgumentConfig{
 						Type: graphql.Int,
+					},
+				},
+			},
+			"getfilteredtrain":{
+				Type: graphql.NewList(types.GetTrainType()),
+				Resolve: Resolver.FilterTrain,
+				Args: graphql.FieldConfigArgument{
+					"arrival" : &graphql.ArgumentConfig{
+						Type: graphql.String,
+					},
+					"dept" : &graphql.ArgumentConfig{
+						Type: graphql.String,
+					},
+					"date": &graphql.ArgumentConfig{
+						Type: graphql.String,
+					},
+					"classes": &graphql.ArgumentConfig{
+						Type: graphql.NewList(graphql.String),
+					},
+					"names": &graphql.ArgumentConfig{
+						Type: graphql.NewList(graphql.String),
 					},
 				},
 			},
@@ -201,10 +248,6 @@ func GetRoot() *graphql.Object{
 					},
 				},
 			},
-			"getalltrainclass": {
-				Type:        graphql.NewList(types.GetTrainClassType()),
-				Resolve:     Resolver.AllTrainClass,
-			},
 			"gettrainnames": {
 				Type:        graphql.NewList(types.GetTrainType()),
 				Resolve:     Resolver.GetTrainName,
@@ -224,6 +267,10 @@ func GetRoot() *graphql.Object{
 			"getallflightfacility": {
 				Type:        graphql.NewList(types.GetFlightFacilityType()),
 				Resolve:     Resolver.AllFlightFacility,
+			},
+			"gettrainclass": {
+				Type:        graphql.NewList(types.GetTrainType()),
+				Resolve:     Resolver.GetTrainClass,
 			},
 			"getallflightcompany": {
 				Type:        graphql.NewList(types.GetFlightCompanyType()),

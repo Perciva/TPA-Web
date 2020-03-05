@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { EventData } from 'src/app/Interfaces/event-interface';
 import { FormControl } from '@angular/forms';
 import { ApolloService } from 'src/app/Services/apollo.service';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MatDialog } from '@angular/material';
 import { InsertFlightComponent } from '../../manage-flight/insert-flight/insert-flight.component';
+import { NotificationComponent } from 'src/app/General/notification/notification.component';
 
 @Component({
   selector: 'app-insert-event',
@@ -13,8 +14,9 @@ import { InsertFlightComponent } from '../../manage-flight/insert-flight/insert-
 export class InsertEventComponent implements OnInit {
   private error:string
   private category:string
+  refNotif: MatDialogRef<NotificationComponent, any>;
   // 
-  constructor(private apollo: ApolloService,private ref:MatDialogRef<InsertFlightComponent> ) { }
+  constructor(private dialog:MatDialog,private apollo: ApolloService,private ref:MatDialogRef<InsertFlightComponent> ) { }
 
   ngOnInit() {
     
@@ -90,7 +92,10 @@ export class InsertEventComponent implements OnInit {
   }
 
   after(res:any){
-    console.log(res)
+    if(res.data.createevent.id == -1 || res.data.createevent.id ==0){
+      this.refNotif = this.dialog.open(NotificationComponent,{data: "Insert Failed, Event Description Must be at least 20 characters long"})
+      return;
+    }
     this.close()
   }
 }

@@ -1,7 +1,6 @@
-package router
+package Connection
 
 import (
-	"../middleware"
 	"github.com/gorilla/mux"
 	//"net/http"
 )
@@ -18,6 +17,6 @@ import (
 //}
 func NewRouter() *mux.Router{
 	r := mux.NewRouter()
-	r.Use(middleware.Cors)
+	//r.Use(middleware.Cors)
 	return r
 }

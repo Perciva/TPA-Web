@@ -1,6 +1,9 @@
 package main
 
 import (
+	"Connection"
+	"middleware"
+
 	//"github.com/gorilla/handlers"
 	"github.com/graphql-go/graphql"
 	"github.com/graphql-go/handler"
@@ -8,8 +11,6 @@ import (
 	//"github.com/gorilla/handlers"
 	"graphql/mutation"
 	"graphql/query"
-	//"log"
-	//"router"
 	"net/http"
 )
 //func Cors(w http.ResponseWriter, r *http.Request) {
@@ -19,17 +20,6 @@ import (
 //	w.Write([]byte("Hello, World!"))
 //}
 
-func SetCORS(handler http.Handler) http.Handler {
-	return http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-
-		writer.Header().Set("Access-Control-Allow-Origin", "*")
-		writer.Header().Set("Access-Control-Allow-Methods", "POST")
-		writer.Header().Set("Access-Control-Allow-Headers", "Accept, Authorization, Content-Type, Content-Length, Accept-Encoding")
-
-		handler.ServeHTTP(writer, request)
-
-	})
-}
 
 func main(){
 	schema, err := graphql.NewSchema(graphql.SchemaConfig{
@@ -49,13 +39,15 @@ func main(){
 		Playground: true,
 	})
 
-	tes := SetCORS(h)
+	tes := middleware.Cors(h)
 
 	//models.InLoc()
 	//models.InTrainStation()
 	//models.InFlight()
 	//models.InFlightCompany()
-	log.Fatal(http.ListenAndServe(":4100",tes))
+	router := Connection.NewRouter()
+	router.Handle("/{key}", tes)
+	log.Fatal(http.ListenAndServe(":4100",router))
 	//router := router.NewRouter()
 	//router.HandleFunc("/api",Cors)
 	//router.Handle("/",h)

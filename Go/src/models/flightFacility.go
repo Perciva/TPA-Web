@@ -31,6 +31,9 @@ func GetAllFlightFacility() []FlightFacility {
 	defer db.Close()
 
 	var facility []FlightFacility
+	if ValidateKey() == false {
+		return facility
+	}
 	db.Find(&facility)
 
 	return facility

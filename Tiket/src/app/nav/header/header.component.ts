@@ -1,7 +1,9 @@
+import { Router } from '@angular/router';
 import { LoginComponent } from './../LoginRegister/login/login.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { RegisterComponent } from '../LoginRegister/register/register.component';
+import { ProfileComponent } from '../profile/profile.component';
 
 @Component({
   selector: 'app-header',
@@ -11,11 +13,13 @@ import { RegisterComponent } from '../LoginRegister/register/register.component'
 export class HeaderComponent implements OnInit {
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public router : Router
   ) { }
 
   private refLogin:MatDialogRef<LoginComponent>
   private refRegister: MatDialogRef<RegisterComponent>
+  private refPopup: MatDialogRef<ProfileComponent>
   lang:string = "../../../assets/Nav/flag-en.png"
   currency:string="IDR"
   private userData:number;
@@ -31,6 +35,9 @@ export class HeaderComponent implements OnInit {
     } else {
       obj.className = 'drop';
     }
+  }
+  checkSess(){
+    return(sessionStorage.getItem('logged') == 'true')
   }
   closeDropdown():void{
     //  var elements = Array.from(document.getElementsByClassName('show'))
@@ -59,5 +66,8 @@ export class HeaderComponent implements OnInit {
   onRegis(){
     this.refRegister = this.dialog.open(RegisterComponent)
     
+  }
+  popProfile(){
+    this.router.navigateByUrl("Profile")
   }
 }

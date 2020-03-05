@@ -4,6 +4,7 @@ import { ApolloService } from './../../Services/apollo.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTab, MatDialog, MatDialogRef, MatPaginator, MatSort } from '@angular/material';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { ChatServiceService } from 'src/app/Services/chat-service.service';
 
 
 
@@ -20,7 +21,7 @@ export class ManageHotelComponent implements OnInit {
   private dataSource:any
   private refInsert:MatDialogRef<InsertHotelComponent>
   private refDelete:MatDialogRef<ConfirmDialogComponent>
-  constructor(private apollo: ApolloService, private dialog: MatDialog) { }
+  constructor(private chat:ChatServiceService,private apollo: ApolloService, private dialog: MatDialog) { }
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sorter: MatSort;
@@ -96,7 +97,7 @@ export class ManageHotelComponent implements OnInit {
     this.refInsert = this.dialog.open(InsertHotelComponent)
     this.refInsert.afterClosed().subscribe(data =>{
       if(data.fromModal== true){
-        console.log("Reload")
+        this.chat.emit("hotel","reload dong")
         this.getInitData()
       }
     })

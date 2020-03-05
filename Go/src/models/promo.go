@@ -28,6 +28,9 @@ func GetPromoById(id int) Promo {
 	defer db.Close()
 
 	var res Promo
+	if ValidateKey() == false {
+		return res
+	}
 	db.Where("id = ?", id).First(&res)
 
 	return res
@@ -39,6 +42,9 @@ func GetOtherPromo(id int) []Promo {
 	defer db.Close()
 
 	var res []Promo
+	if ValidateKey() == false {
+		return res
+	}
 	db.Where("id != ?", id).Limit(3).Find(&res)
 
 	fmt.Println("model",res)

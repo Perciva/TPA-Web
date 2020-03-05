@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ApolloService } from 'src/app/Services/apollo.service';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MatDialog } from '@angular/material';
 import { FlightData } from 'src/app/Interfaces/flight-interface';
+import { NotificationComponent } from 'src/app/General/notification/notification.component';
 
 @Component({
   selector: 'app-insert-flight',
@@ -13,8 +14,12 @@ export class InsertFlightComponent implements OnInit {
   private arrivalTimeFC:FormControl
   private departureTimeFC:FormControl
   private error:string
+  refNotif: MatDialogRef<NotificationComponent, any>;
   // 
-  constructor(private apollo: ApolloService,private ref:MatDialogRef<InsertFlightComponent> ) { }
+  constructor(
+    private apollo: ApolloService,
+    private ref:MatDialogRef<InsertFlightComponent>,
+    private dialog: MatDialog) { }
 
   ngOnInit() {
     this.arrivalTimeFC = new FormControl()
@@ -96,6 +101,10 @@ export class InsertFlightComponent implements OnInit {
 
   after(res:any){
     console.log(res)
+    if(res.data.createflight.id == -1 || res.data.createflight.id == 0 ){
+      this.refNotif = this.dialog.open(NotificationComponent,{data: "Insert Failed,"})
+      return;
+    }
     this.close()
   }
 }

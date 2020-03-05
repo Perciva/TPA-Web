@@ -27,6 +27,18 @@ func GetUserType() *graphql.Object{
 				"phone": &graphql.Field{
 					Type: graphql.String,
 				},
+				"address": &graphql.Field{
+					Type: graphql.String,
+				},
+				"title": &graphql.Field{
+					Type: graphql.String,
+				},
+				"languange": &graphql.Field{
+					Type: graphql.String,
+				},
+				"kode_pos": &graphql.Field{
+					Type: graphql.String,
+				},
 			},
 		})
 	}

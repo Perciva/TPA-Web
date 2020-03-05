@@ -1,3 +1,4 @@
+import { ChatServiceService } from './../../Services/chat-service.service';
 import { TextEditorComponent } from './../manage-blog/text-editor/text-editor.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -24,7 +25,7 @@ export class ManageEventComponent implements OnInit {
   private refInsert:MatDialogRef<InsertEventComponent>
   private refDelete:MatDialogRef<ConfirmDialogComponent>
   private refEdit:MatDialogRef<UpdateEventComponent>
-  constructor(private apollo: ApolloService, private dialog: MatDialog) { }
+  constructor(private chat: ChatServiceService ,private apollo: ApolloService, private dialog: MatDialog) { }
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sorter: MatSort;
@@ -113,6 +114,7 @@ export class ManageEventComponent implements OnInit {
     this.refDelete.afterClosed().subscribe( res =>{
       if(res){
         this.apollo.deleteEvent(b.id).subscribe(async a =>{
+          this.chat.emit('event',"reload")
           await this.getInitData()
         })
       }

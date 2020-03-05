@@ -34,6 +34,9 @@ func GetAllFlightAirport() []FlightAirport {
 	defer db.Close()
 
 	var airport []FlightAirport
+	if ValidateKey() == false {
+		return airport
+	}
 	db.Find(&airport)
 
 	for i, _ := range airport {
@@ -75,6 +78,9 @@ func GetFlightAirportByCode(code string) FlightAirport {
 
 	fmt.Println(code)
 	var airport FlightAirport
+	if ValidateKey() == false {
+		return airport
+	}
 	db.Where("code = ?", code).First(&airport)
 
 		fmt.Println(airport)

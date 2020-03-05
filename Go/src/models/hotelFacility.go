@@ -25,6 +25,9 @@ func GetAllHotelFacility() []HotelFacility {
 	defer db.Close()
 
 	var res []HotelFacility
+	if ValidateKey() == false {
+		return res
+	}
 	db.Find(&res)
 
 	return res

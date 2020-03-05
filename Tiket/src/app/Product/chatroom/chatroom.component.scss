@@ -1,0 +1,50 @@
+
+#chat-container{
+    padding: 5%;
+   
+    img{
+     width: 50%;
+    }
+    a{
+     text-decoration: none;
+     color: black;
+    }
+   
+    #bubble-container{
+     margin: 5%;
+    }
+   
+    #chat-input{
+     display: flex;
+     flex-direction: row;
+   
+     mat-form-field{
+      flex-grow: 4;
+      height: 100%;
+     }
+   
+     button{
+      flex-grow: 2;
+      height: 65px;
+      padding: 1%;
+     }
+    }
+    .send {
+     position: relative;
+     background: #00aabb;
+     border-radius: .4em;
+     padding: 10px;
+     margin: 1% 1px;
+    }
+
+   
+    .recv {
+     position: relative;
+     background: #B39637;
+     border-radius: .4em;
+     padding: 10px;
+     margin: 1% 0px;
+    }
+    
+  
+   }

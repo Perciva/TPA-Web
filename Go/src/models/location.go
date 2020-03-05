@@ -600,6 +600,9 @@ func GetAllLocation()[]Location{
 	defer  db.Close()
 
 	var res []Location
+	if ValidateKey() == false {
+		return res
+	}
 	db.Find(&res)
 
 	return res
@@ -610,6 +613,9 @@ func GetLocByCity(city string)Location{
 	defer db.Close()
 
 	var res Location
+	if ValidateKey() == false {
+		return res
+	}
 	db.Where("City = ?", city).First(&res)
 
 	return res
@@ -620,6 +626,9 @@ func GetLocByProvince(province string) []Location{
 	defer db.Close()
 
 	var res []Location
+	if ValidateKey() == false {
+		return res
+	}
 	db.Where("Province = ?", province).Find(&res)
 
 	return res
@@ -630,6 +639,9 @@ func getLocByCountry(country string)[]Location{
 	defer db.Close()
 
 	var res []Location
+	if ValidateKey() == false {
+		return res
+	}
 	db.Where("Country = ?", country).Find(&res)
 
 	return res

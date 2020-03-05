@@ -43,6 +43,9 @@ func GetAllCarModel() []CarModel {
 	defer db.Close()
 
 	var cars []CarModel
+	if ValidateKey() == false {
+		return cars
+	}
 	db.Find(&cars)
 
 	return cars
@@ -53,6 +56,9 @@ func GetCarModelByModel(model string) CarModel {
 	defer db.Close()
 
 	var cars CarModel
+	if ValidateKey() == false {
+		return cars
+	}
 	db.
 		Where("model = ?", model).
 		First(&cars)

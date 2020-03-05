@@ -31,6 +31,9 @@ func GetAllFlightCompany() []FlightCompany {
 	defer db.Close()
 
 	var company []FlightCompany
+	if ValidateKey() == false {
+		return company
+	}
 	db.Find(&company)
 
 	return company
@@ -47,6 +50,9 @@ func GetFlightCompanyByName(name string) FlightCompany {
 	defer db.Close()
 
 	var company FlightCompany
+	if ValidateKey() == false {
+		return company
+	}
 	db.Where("name = ?", name).First(&company)
 
 	fmt.Println(company)

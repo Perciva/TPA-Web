@@ -36,9 +36,23 @@ func GetAllEntertainment() []Entertainment {
 	defer db.Close()
 
 	var event []Entertainment
+	if ValidateKey() == false {
+		return event
+	}
 	db.Find(&event)
 
 	return event
+}
+
+func GetEntertainmentByCategory(category string)[]Entertainment{
+	db := Connection.Connect()
+	defer db.Close()
+
+	var res []Entertainment
+	db.Where("type = ?", category).Limit(3).Find(&res)
+
+
+	return res
 }
 
 func GetEntertainmentById(id int) Entertainment {
@@ -46,6 +60,9 @@ func GetEntertainmentById(id int) Entertainment {
 	defer db.Close()
 
 	var event Entertainment
+	if ValidateKey() == false {
+		return event
+	}
 	db.Where("id = ?", id).First(&event)
 
 	return event
@@ -54,6 +71,9 @@ func GetEntertainmentById(id int) Entertainment {
 func InsertEntertainment(title string, price int, location string, latitude float64, longitude float64,
 	date time.Time, category string, image string, desc string) *Entertainment {
 
+	if len(desc)< 20 || len(title) < 5{
+		return &Entertainment{Id:-1}
+	}
 	db := Connection.Connect()
 	defer db.Close()
 

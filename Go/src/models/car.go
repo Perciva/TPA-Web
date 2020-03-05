@@ -45,6 +45,9 @@ func GetAllCar() []Car {
 	defer db.Close()
 
 	var cars []Car
+	if ValidateKey() == false {
+		return cars
+	}
 	db.Find(&cars)
 
 	for i, _ := range cars {
@@ -62,6 +65,9 @@ func GetCarByLocation(city string) []Car {
 	location := GetLocByProvince(city)
 
 	var cars []Car
+	if ValidateKey() == false {
+		return cars
+	}
 
 	if len(location) == 1 {
 		db.Where("location_id = ?", location[0].Id).Find(&cars)

@@ -1,8 +1,10 @@
+import { ChatServiceService } from './../../../Services/chat-service.service';
 import { ApolloService } from 'src/app/Services/apollo.service';
 import { TrainData } from './../../../Interfaces/train-interface';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MatDialog } from '@angular/material';
+import { NotificationComponent } from 'src/app/General/notification/notification.component';
 
 @Component({
   selector: 'app-insert-train',
@@ -13,8 +15,9 @@ export class InsertTrainComponent implements OnInit {
   private arrivalTimeFC:FormControl
   private departureTimeFC:FormControl
   private error:string
+  refNotif: any;
   
-  constructor(private apollo: ApolloService,private ref:MatDialogRef<InsertTrainComponent> ) { }
+  constructor(private dialog:MatDialog, private apollo: ApolloService,private ref:MatDialogRef<InsertTrainComponent> ) { }
 
   ngOnInit() {
     this.arrivalTimeFC = new FormControl()
@@ -101,6 +104,9 @@ export class InsertTrainComponent implements OnInit {
   }
 
   after(res:any){
+    if(res.data.createtrain.id == -1){
+      this.refNotif = this.dialog.open(NotificationComponent,{data: "Insert Failed, Train Code must be at least 2 characters"})
+    }
     console.log(res)
     this.close()
   }

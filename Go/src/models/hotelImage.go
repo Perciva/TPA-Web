@@ -26,6 +26,9 @@ func GetAllHotelImages()[]HotelImage{
 	defer db.Close()
 
 	var res []HotelImage
+	if ValidateKey() == false {
+		return res
+	}
 	db.Find(&res)
 
 	return res

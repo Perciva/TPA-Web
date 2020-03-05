@@ -32,6 +32,10 @@
                 <input id="pclass" value={{p.people}},{{p.jenis}} type="text" placeholder="Dewasa Bayi">
             </div>
         </div>
+        
+        <div class="buton" >
+            <button align="right" (click)="search()"><h4>Cari Kereta Api</h4></button>
+        </div>
     </div>
 
     <div class="content-wrap">
@@ -46,7 +50,9 @@
                 </mat-expansion-panel-header>
                 <div class="loc">
                     <div *ngFor="let item of Classes; let i =index" >
-                        <mat-checkbox [(ngModel)]="ClassesModel[i]" (change)= changed()>{{item}}</mat-checkbox>
+                        <mat-checkbox [(ngModel)]="ClassesModel[i]" (change)= "changed()">
+                            {{item}}
+                        </mat-checkbox>
                     </div>
                 </div>
             
@@ -62,7 +68,7 @@
                 </mat-expansion-panel-header>
                 <div>
                     <div *ngFor="let item of hours; let i =index">
-                        <mat-checkbox [(ngModel)]="hoursModel[i]" (change) = changed()>
+                        <mat-checkbox [(ngModel)]="hoursModel[i]" >
                             {{item}}
                         </mat-checkbox>
                     </div>
@@ -77,7 +83,7 @@
                 </mat-expansion-panel-header>
                 <div>
                     <div *ngFor="let item of trainName; let i =index">
-                        <mat-checkbox [(ngModel)]="trainNameModel[i]">
+                        <mat-checkbox [(ngModel)]="trainNameModel[i]" (change)= "changed()">
                             {{item.name}}
                         </mat-checkbox>
                     </div>

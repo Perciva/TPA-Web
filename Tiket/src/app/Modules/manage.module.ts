@@ -31,7 +31,7 @@ const decs:any = [
   TextEditorComponent,
   InsertEventComponent,
   ManageEventComponent,
-  UpdateEventComponent
+  UpdateEventComponent,
 ]
 const imps:any =[
   MatTableModule,
@@ -47,7 +47,8 @@ const imps:any =[
   MatSortModule,
   NgxMaterialTimepickerModule,
   MatDatepickerModule,
-  MatSelectModule
+  MatSelectModule,
+
 ]
 
 @NgModule({

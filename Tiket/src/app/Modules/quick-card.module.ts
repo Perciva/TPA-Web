@@ -1,3 +1,7 @@
+import { ChatroomComponent } from './../Product/chatroom/chatroom.component';
+import { PlaneSearchComponent } from './../Product/main-plane/plane-search/plane-search.component';
+import { CalendarComponent } from './../Product/main-plane/calendar/calendar.component';
+import { MainCarComponent } from './../Product/main-car/main-car.component';
 import { PromoComponent } from './../Product/promo/promo.component';
 import { NotificationComponent } from './../General/notification/notification.component';
 import { InsertBlogComponent } from './../Manage/manage-blog/insert-blog/insert-blog.component';
@@ -15,7 +19,7 @@ import { CarComponent } from '../Home/QuickCard/car/car.component';
 import { PlaneComponent } from '../Home/QuickCard/plane/plane.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatRadioModule, MatDatepickerModule, MatNativeDateModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatSidenavModule, MatExpansionModule, MatProgressBarModule, MatDividerModule, MatButtonModule, MatSelectModule } from '@angular/material'
+import { MatRadioModule, MatDatepickerModule, MatNativeDateModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatSidenavModule, MatExpansionModule, MatProgressBarModule, MatDividerModule, MatButtonModule, MatSelectModule } from '@angular/material'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxContentLoadingModule } from 'ngx-content-loading';
 import { StarRatingComponent } from '../General/star-rating/star-rating.component';
@@ -26,6 +30,12 @@ import { Ng5SliderModule } from 'ng5-slider';
 import { TrainDetailComponent } from '../Product/main-train/train-detail/train-detail.component';
 import { TrainSearchComponent } from '../Product/main-train/train-search/train-search.component';
 import { TrainSortPipe } from '../Pipes/train-sort.pipe';
+import { CarSearchComponent } from '../Product/main-car/car-search/car-search.component';
+
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { MainPlaneComponent } from '../Product/main-plane/main-plane.component';
+import { ProfileComponent } from '../nav/profile/profile.component';
 
 const decs=[
   PlaneComponent,
@@ -47,7 +57,15 @@ const decs=[
   TrainSortPipe,
   MainBlogComponent,
   BlogDetailComponent,
-  PromoComponent
+  PromoComponent,
+  CarSearchComponent,
+  MainCarComponent,
+  CalendarComponent,
+  PlaneSearchComponent,
+  MainPlaneComponent,
+  ProfileComponent,
+  ChatroomComponent
+
   
 ]
 const imps = [
@@ -65,7 +83,8 @@ const imps = [
   MatDividerModule,
   Ng5SliderModule,
   MatButtonModule,
-  MatSelectModule
+  MatSelectModule,
+  
 ]
 @NgModule({
   declarations: [
@@ -75,14 +94,19 @@ const imps = [
   imports: [
     CommonModule,
     
-    imps
+    imps,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    })
   ],
   exports:[
     decs,imps
   ],
   entryComponents:[
     InsertBlogComponent,
-    NotificationComponent
+    NotificationComponent,
+    
   ]
   
 })

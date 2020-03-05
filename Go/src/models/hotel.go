@@ -47,6 +47,9 @@ func HotelFilter(locations []int,ratings []int , fac []string, min int, max int)
 
 	fmt.Println(locations,ratings)
 	var res []Hotel
+	if ValidateKey() == false {
+		return res
+	}
 	db.Joins("JOIN hotel_facilities on hotels.id = hotel_facilities.hotel_id").
 		Find(&res, "(location_id IN (?) OR ?) AND (floor(rating) IN (?) OR ?) AND (hotel_facilities.name IN (?) OR ?) AND (price >= ? OR ? = -1) AND (price <= ? OR ? = -1)",locations, len(locations) == 0, ratings,len(ratings) == 0, fac, len(fac)==0,min,min,max,max)
 
@@ -66,6 +69,9 @@ func GetAllHotel() []Hotel {
 	defer db.Close()
 
 	var res []Hotel
+	if ValidateKey() == false {
+		return res
+	}
 	db.Find(&res)
 
 	for z, _ := range res {
@@ -82,6 +88,9 @@ func GetHotel(Id int) Hotel {
 	defer db.Close()
 
 	var res Hotel
+	if ValidateKey() == false {
+		return res
+	}
 
 	db.Where("id=?", Id).First(&res)
 
@@ -136,6 +145,10 @@ func InsertHotel(name string, address string, city string, price int, rating flo
 	db := Connection.Connect()
 	defer db.Close()
 
+	if len(desc) < 20{
+		return &Hotel{Id:-1}
+	}
+
 	loc := GetLocByCity(city)
 
 	newHotel := &Hotel{
@@ -165,6 +178,9 @@ func GetHotelByProvince(province string) []Hotel {
 	loc := GetLocByProvince(province)
 
 	var res []Hotel
+	if ValidateKey() == false {
+		return res
+	}
 
 	if len(loc) == 1 {
 		db.Where("location_id = ?", loc[0].Id).Find(&res)
@@ -189,6 +205,9 @@ func GetHotelByLatLong(lat float64, long float64) Hotel {
 	defer db.Close()
 
 	var res Hotel
+	if ValidateKey() == false {
+		return res
+	}
 	db.Where("lat = ?", lat).Where("long = ?", long).First(&res)
 
 	db.Model(res).Related(&res.Location, "location_Id")
@@ -240,6 +259,9 @@ func GetNearbyHotel(lat float64, long float64)[]Hotel {
 	defer db.Close()
 
 	var res []Hotel
+	if ValidateKey() == false {
+		return res
+	}
 
 	db.Find(&res)
 

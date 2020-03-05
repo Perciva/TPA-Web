@@ -22,15 +22,19 @@ export class ApolloService {
     try{
       return this.apollo.query<Query>({
         query: gql`
-          query users{
-            users{
-              firstname
-              lastname
-              password
-              email
-              phone
-            }
-          }`
+        query{
+          users{
+            title
+            lastname
+            address
+            firstname
+            id
+            kode_pos
+            phone
+            title
+            email
+          }
+        }`
       })
     }catch(err){
       return null
@@ -47,6 +51,63 @@ export class ApolloService {
           province
         }
       }`
+    })
+  }
+  subscribe(email:string):Observable<Query>{
+    return this.apollo.query<Query>({
+      query:gql`
+      query subscribe($mail:String){
+        subscribe(email: $mail){
+          email
+        }
+      }`,
+      variables:{
+        mail:email
+      }
+    })
+  }
+  selectUserById(id:number):Observable<Query>{
+    return this.apollo.query<Query>({
+      query: gql`
+      query userbyid($id:Int){
+        userbyid(id:$id){
+           title
+          lastname
+          address
+          firstname
+          id
+          kode_pos
+          phone
+          title
+          languange
+          email
+        }
+      }`,
+      variables:{
+        id:id
+      }
+    })
+  }
+  selectEventByCategory(category:string):Observable<Query>{
+    return this.apollo.query<Query>({
+      query: gql`
+      query getevenbycategory($category:String){
+        geteventbycategory(category:$category){
+          content
+          date
+          id
+          image
+          latitude
+          location
+          longitude
+          price
+          title
+          type
+        }
+      }`,
+      variables:{
+        category:category
+      }
     })
   }
   selectAllHotelFacility():Observable<Query>{
@@ -143,9 +204,7 @@ export class ApolloService {
                 code
                 name
             }
-            class {
-                name
-            }
+            class
             transit {
                 code
                 name
@@ -170,7 +229,71 @@ export class ApolloService {
           gettrainnames{
             name
           }
-        }`
+        }`,
+    })
+  }
+  selectTrainClass():Observable<Query>{
+    return this.apollo.query<Query>({
+      query: gql`
+      query{
+        gettrainclass{
+          class
+        }
+      }`,
+        
+    })
+  }
+  getFilteredTrain(arrival:string, dest:string, date:string, names:string[],classes:string[] ){
+    return this.apollo.query<Query>({
+      query: gql`query getfilteredtrain(
+        $arrival:String,
+        $dept:String,
+        $date:String,
+        $class:[String],
+        $names:[String]
+      ){
+        getfilteredtrain(
+          arrival:$arrival,
+          dept:$dept,
+          date:$date,
+          classes:$class,
+          names:$names
+        ){
+          Id
+          arrival{
+              code
+              id
+              locationId
+              name
+          }
+          transit {
+              code
+              id
+              locationId
+              name
+          }
+          departure {
+              code
+              id
+              locationId
+              name
+          }
+          arrivalTime
+          departureTime
+          name
+          price
+          seat
+          code
+          class
+        }
+      }`,
+      variables:{
+        arrival: arrival,
+        dept:dest,
+        date:date,
+        names:names,
+        class:classes
+      }
     })
   }
   selectTrainByLocation(arr: string, dep: string, time: string) {
@@ -210,9 +333,7 @@ export class ApolloService {
             price
             seat
             code
-            class{
-              name
-            }
+            class
         }
     }`,
       variables: {
@@ -878,7 +999,8 @@ export class ApolloService {
         $arrivalTime: String, 
         $transit: String, 
         $departure: String, 
-        $departureTime: String
+        $departureTime: String,
+        $class:String
         ){
             createtrain(
               name: $name, 
@@ -889,7 +1011,8 @@ export class ApolloService {
               arrivalTime: $arrivalTime, 
               transit: $transit, 
               departure: $departure, 
-              departureTime: $departureTime
+              departureTime: $departureTime,
+              class: $class
             ){
                 Id
             }
@@ -903,7 +1026,8 @@ export class ApolloService {
           arrivalTime: arrivalTimeConverted,
           transit: transitConverted,
           departure: departureConverted,
-          departureTime: departureTimeConverted
+          departureTime: departureTimeConverted,
+          class : train.class
         }
     })
   }
@@ -1024,6 +1148,49 @@ deleteEvent(id: number) {
       id: id,
     }
   });
+}
+updateUser(address:string,email:string, fname:string, lname :string, id:number, kode_pos:string, phone:
+  string,title:string, lang:string){
+  return this.apollo.mutate<any>({
+    mutation: gql`
+    mutation updateUser(
+      $firstname :String,
+      $lastname:String,
+      $email:String,
+      $kode_pos:String,
+      $title:String,
+      $id:Int,
+      $address: String,
+      $phone:String,
+      $languange:String
+    ){
+     updateuser(
+      firstname : $firstname,
+      lastname: $lastname,
+      email:$email,
+      kode_pos: $kode_pos,
+      title :  $title,
+      id : $id,
+      address : $address,
+      phone: $phone,
+      languange : $languange
+    ){
+      id
+    }
+    }`,
+    variables:{
+      address: address,
+      email: email,
+      firstname: fname,
+      id: id,
+      kode_pos: kode_pos,
+      lastname: lname,
+      phone: phone,
+      title: title,
+      languange: lang
+    }
+    
+  })
 }
 
 DeleteHotel(hotelid:number){

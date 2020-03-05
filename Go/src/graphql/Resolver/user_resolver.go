@@ -22,6 +22,21 @@ func GetUserByPhoneOrEmail(p graphql.ResolveParams)(i interface{}, err error){
 	//}
 	return user, nil
 }
+func UpdateUser(p graphql.ResolveParams)(interface{},error){
+	id:= p.Args["id"].(int)
+	fname:=p.Args["firstname"].(string)
+	lname:=p.Args["lastname"].(string)
+	email:=p.Args["email"].(string)
+	phone:=p.Args["phone"].(string)
+	lang:=p.Args["languange"].(string)
+	title:=p.Args["title"].(string)
+	address:=p.Args["address"].(string)
+	kodepos:=p.Args["kode_pos"].(string)
+
+	user := models.UpdateUser(id,fname,lname,email,phone,lang,title,address,kodepos)
+
+	return user,nil
+}
 func CreateUser(p graphql.ResolveParams)(interface{},error){
 	firstname:=p.Args["firstname"].(string)
 	lastname:=p.Args["lastname"].(string)
@@ -30,6 +45,14 @@ func CreateUser(p graphql.ResolveParams)(interface{},error){
 	phone:=p.Args["phone"].(string)
 
 	user := models.CreateUser(firstname,lastname,password,email,phone)
+
+	return user, nil
+}
+
+func GetUserByID(p graphql.ResolveParams)(interface{},error){
+	id:=p.Args["id"].(int)
+
+	user := models.GetUserByID(id)
 
 	return user, nil
 }

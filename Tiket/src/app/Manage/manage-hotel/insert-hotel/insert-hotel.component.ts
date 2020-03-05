@@ -6,7 +6,8 @@ import { HotelType } from './../../../Interfaces/hotel-type';
 import { Component, OnInit } from '@angular/core';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { NotificationComponent } from 'src/app/General/notification/notification.component';
 
 @Component({
   selector: 'app-insert-hotel',
@@ -15,9 +16,11 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 
 export class InsertHotelComponent implements OnInit {
+  refNotif: MatDialogRef<NotificationComponent, any>;
 
   constructor(private apollo: ApolloService, 
-              private ref:MatDialogRef<InsertHotelComponent>) { }
+              private ref:MatDialogRef<InsertHotelComponent>,
+              private dialog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -44,7 +47,6 @@ export class InsertHotelComponent implements OnInit {
     if ((value || '').trim()) {
       this.hotelTypes.push({name: value.trim(),path: value.trim()+".jpg"});
     }
-
     // Reset the input value
     if (input) {
       input.value = '';
@@ -146,6 +148,10 @@ export class InsertHotelComponent implements OnInit {
     }
   }
   insertOther(h:any){
+    if(h.data.createhotel.id == -1 || h.data.createhotel.id ==0){
+      this.refNotif = this.dialog.open(NotificationComponent,{data: "Insert Failed, Hotel Description Must be at least 20 characters long"})
+      return;
+    }
     console.log(h)
     if(h.data.createhotel.id == 0){
       return

@@ -25,7 +25,7 @@ $Tiket-theme: mat-light-theme($Tiket-primary, $Tiket-accent, $Tiket-warn);
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($Tiket-theme);
-
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }

@@ -17,13 +17,13 @@ export function getConfig(){
   return config;
 }
 @NgModule({
-  declarations: [],
+  declarations: [ ],
   imports: [
     MatDialogModule,
     SocialLoginModule
   ],
   exports:[
-    MatDialogModule
+    MatDialogModule,
   ],
   providers: [
     {

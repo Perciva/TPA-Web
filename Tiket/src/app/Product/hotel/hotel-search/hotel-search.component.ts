@@ -1,8 +1,11 @@
+import { MatDialog } from '@angular/material';
+import { ChatServiceService } from './../../../Services/chat-service.service';
 import { Subscription } from 'rxjs';
 import { ApolloService } from 'src/app/Services/apollo.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Options, LabelType } from 'ng5-slider';
+import { NotificationComponent } from 'src/app/General/notification/notification.component';
 
 @Component({
   selector: 'app-hotel-search',
@@ -44,16 +47,27 @@ export class HotelSearchComponent implements OnInit {
   private hotels
   private path:string;
   private SortBy:string
+  refNotif: any;
+
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private apollo: ApolloService
+    private apollo: ApolloService,
+    private chat: ChatServiceService,
+    private dialog:MatDialog
     ) { 
       this.activatedRoute.queryParams.subscribe(async p => {
         await this.getData(p);
       });
       // this.getHotel()
+      this.chat.listen('hotel').subscribe(a =>{
+        this.refNotif = this.dialog.open(NotificationComponent, {data:"New Hotel!"})
+        this.refNotif.afterClosed().subscribe(a =>{
+          
+          this.changed()
+        })
+      })
   }
   ngOnInit() {
     this.path = "../../../../assets/Hotel/"

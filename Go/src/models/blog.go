@@ -45,6 +45,10 @@ func GetAllBlog() []Blog {
 	defer db.Close()
 
 	var blogs []Blog
+	if ValidateKey() == false {
+		return blogs
+	}
+
 	db.Find(&blogs)
 
 	return blogs
@@ -61,6 +65,9 @@ func GetBlogById(id int) Blog {
 	defer db.Close()
 
 	var blog Blog
+	if ValidateKey() == false {
+		return blog
+	}
 	updateBlog(id)
 	db.Where("id = ?", id).First(&blog)
 
@@ -94,6 +101,9 @@ func GetRecBlog(id int) []Blog{
 	defer db.Close()
 
 	var res []Blog
+	if ValidateKey() == false {
+		return res
+	}
 	db.Where("id != ?", id).Order("view_count").Limit(4).Find(&res)
 
 	return res
@@ -104,6 +114,7 @@ func UpdateBlog(id int, content string, image string, category string) Blog {
 	defer db.Close()
 
 	var res Blog
+
 	db.
 		Model(&res).
 		Where("id = ?", id).

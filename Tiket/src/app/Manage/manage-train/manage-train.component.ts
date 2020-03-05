@@ -1,3 +1,4 @@
+import { ChatServiceService } from './../../Services/chat-service.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
@@ -18,7 +19,7 @@ export class ManageTrainComponent implements OnInit {
   private dataSource:any
   private refInsert:MatDialogRef<InsertTrainComponent>
   private refDelete:MatDialogRef<ConfirmDialogComponent>
-  constructor(private apollo: ApolloService, private dialog: MatDialog) { }
+  constructor(private chat:ChatServiceService, private apollo: ApolloService, private dialog: MatDialog) { }
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sorter: MatSort;
@@ -86,6 +87,7 @@ export class ManageTrainComponent implements OnInit {
     this.refInsert = this.dialog.open(InsertTrainComponent)
     this.refInsert.afterClosed().subscribe(data =>{
       if(data.fromModal== true){
+        this.chat.emit("train","reload dong")
         this.getInitData()
       }
     })
