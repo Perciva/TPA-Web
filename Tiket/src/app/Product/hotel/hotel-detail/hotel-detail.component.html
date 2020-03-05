@@ -1,0 +1,65 @@
+
+
+<div class="images">
+    <div *ngFor="let item of hotel.photo; let i = index"></div>
+    <img src="{{path}}{{hotel.photo[0].path}}" >
+</div>
+    
+<div class="map" id="map"></div>
+<div>
+    {{hotel.name}}
+    <br>
+    {{hotel.description}}
+    <br>
+    Price per night: {{hotel.price}}
+    <br>
+    Rating: {{hotel.rating}}
+    <br>
+    Address: {{hotel.address}}
+    <br>
+
+    <div *ngFor="let item of hotel.facility">
+        {{item.name}} <br>
+    </div>
+    <div class="share">
+        <button mat-button (click)="fb()">Facebook</button>
+        <button mat-button (click)="copy()">Copy </button>
+        <button mat-button (click)="line()">Line</button>
+        <button mat-button (click)="wa()">WhatsApp</button>
+    </div>
+
+</div>
+
+<div class="container">
+    <label class="title">Recommended Hotels</label>
+    <div class="placeholderContainer" *ngIf="hotelList==null">
+        <ngx-content-loading 
+            [speed]="'1900ms'"
+            [width]="1760"
+            [height]="700"
+            [primaryColor]="'#363636'"
+            [secondaryColor]="'#5e5e5e'" >
+                <svg:g ngx-rect width="400" height="300" y="10" x="5" rx="5" ry="5"></svg:g>
+                <svg:g ngx-rect width="400" height="300" y="10" x="455" rx="5" ry="5"></svg:g>
+                <svg:g ngx-rect width="400" height="300" y="10" x="905" rx="5" ry="5"></svg:g>
+                <svg:g ngx-rect width="400" height="300" y="10" x="1350" rx="5" ry="5"></svg:g>
+                <svg:g ngx-rect width="400" height="300" y="360" x="5" rx="5" ry="5"></svg:g>
+                <svg:g ngx-rect width="400" height="300" y="360" x="455" rx="5" ry="5"></svg:g>
+                <svg:g ngx-rect width="400" height="300" y="360" x="905" rx="5" ry="5"></svg:g>
+                <svg:g ngx-rect width="400" height="300" y="360" x="1350" rx="5" ry="5"></svg:g>
+        </ngx-content-loading>
+    </div>
+    <div class=loadedContainer>
+        <div *ngFor="let item of hotelList" class="box">
+            <div *ngIf="item.photo.length>0">
+
+                <img src="{{path}}{{item.photo[0].path}}">
+            </div>
+            <label>{{item.name}}</label>
+            <label>{{item.price}}</label>
+            <app-star-rating [Rating]="item.rating/5*100"></app-star-rating>
+        </div>
+    </div>
+  
+</div>
+

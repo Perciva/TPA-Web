@@ -1,8 +1,8 @@
 package models
 
 import (
-	"../../connection"
 	"Connection"
+	"fmt"
 	"log"
 	"time"
 )
@@ -79,6 +79,7 @@ func GetFlightById(Id int) Flight {
 func InsertFlight(companyName string, fromAirportName string, arrivalTime time.Time,
 	toAirportName string, departureTime time.Time, price int, model string, transitAirportName string) *Flight {
 
+	fmt.Println("Insert Flight")
 	db := Connection.Connect()
 	defer db.Close()
 
@@ -93,7 +94,7 @@ func InsertFlight(companyName string, fromAirportName string, arrivalTime time.T
 		transitId = transitAirport.Id
 		transitLocationId = transitAirport.LocationId
 	}
-
+	fmt.Println(toAirport,company, toAirport)
 	newFlight := &Flight{
 		CompanyId:         company.Id,
 		FromAirportId:     fromAirport.Id,
@@ -108,7 +109,7 @@ func InsertFlight(companyName string, fromAirportName string, arrivalTime time.T
 		TransitLocationId: transitLocationId,
 	}
 	db.Save(newFlight)
-
+	fmt.Println(newFlight, "Inserted -> resolver")
 	log.Println("Insert New Flight Success")
 	return newFlight
 }

@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .button {
+      button {
+        border: 1px solid black;
+        background-color: gainsboro;
+        margin: 0 5px;
+        cursor: pointer;
+        &:hover {
+          background-color: pink;
+        }
+      }
+    }
+    .editor{
+      width: 100%;
+      .title {
+        padding: 20px;
+        margin-top: 10px;
+        border: 1px solid gray;
+        height: auto;
+      }
+      .content {
+        height: 200px;
+        padding: 20px;
+        margin-top: 10px;
+        border: 1px solid gray;
+      }
+    }
+  }

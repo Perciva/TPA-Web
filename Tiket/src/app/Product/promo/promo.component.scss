@@ -1,0 +1,23 @@
+.promo{
+    margin-bottom: 30px;
+
+}
+.share {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+    cursor: pointer;
+      button{
+          background-color: mediumspringgreen;
+      } 
+  }
+img{
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+}
+.label{
+    font-size: 25px;
+
+}

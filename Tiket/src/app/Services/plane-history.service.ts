@@ -26,4 +26,7 @@ export class PlaneHistoryService {
   previousHistory(){
     return sessionStorage.getItem('planeHistory')
   }
+  removeHistory(){
+    sessionStorage.removeItem('planeHistory')
+  }
 }

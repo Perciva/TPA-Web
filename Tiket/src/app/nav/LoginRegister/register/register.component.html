@@ -22,4 +22,15 @@
     <label class="errmsg" id="err">{{message}}</label>
 
     <button class="next" (click)="register()">BUAT AKUN</button>
+    <div class="socmed">
+        <button (click)="signInGoogle()">
+            <img src="../../../../assets/Nav/login/gugel.svg">
+            <label>Google</label>
+        </button>
+        <div class="hr"></div>
+        <button (click)="signInFB()">
+            <img src="../../../../assets/Nav/login/fb.svg">
+            <label>Facebook</label>
+        </button>
+    </div>
 </div>

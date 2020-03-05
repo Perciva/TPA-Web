@@ -12,8 +12,10 @@ export class RecHotelComponent implements OnInit {
   private rec$:Subscription
   private hotelList:any
   private path:string
+  private tes:number
 
   constructor(private apollo: ApolloService) { 
+    this.tes = 4
     navigator.geolocation.getCurrentPosition(curr => {
       // console.log("?")
       // console.log(curr)

@@ -2,6 +2,7 @@ package models
 
 import (
 	"Connection"
+	"fmt"
 	"log"
 	"time"
 )
@@ -48,18 +49,30 @@ func GetAllBlog() []Blog {
 
 	return blogs
 }
+func updateBlog(id int){
+	db := Connection.Connect()
+	defer db.Close()
+	var blog Blog
+	db.Raw("UPDATE blogs SET view_count = view_count + 1 WHERE id = ?", id).Scan(&blog)
 
-func GetBlogByID(id int) Blog {
+}
+func GetBlogById(id int) Blog {
 	db := Connection.Connect()
 	defer db.Close()
 
 	var blog Blog
+	updateBlog(id)
 	db.Where("id = ?", id).First(&blog)
 
 	return blog
 }
 
 func InsertBlog(userID int, title string, content string, image string, category string) *Blog {
+	fmt.Println(content)
+	if len(content) < 10 {
+		return &Blog{Id:-1}
+	}
+
 	db := Connection.Connect()
 	defer db.Close()
 
@@ -76,14 +89,23 @@ func InsertBlog(userID int, title string, content string, image string, category
 	log.Println("Insert New Blog Success")
 	return newBlog
 }
+func GetRecBlog(id int) []Blog{
+	db:= Connection.Connect()
+	defer db.Close()
+
+	var res []Blog
+	db.Where("id != ?", id).Order("view_count").Limit(4).Find(&res)
+
+	return res
+}
 
 func UpdateBlog(id int, content string, image string, category string) Blog {
 	db := Connection.Connect()
 	defer db.Close()
 
-	var updateBlog Blog
+	var res Blog
 	db.
-		Model(&updateBlog).
+		Model(&res).
 		Where("id = ?", id).
 		Updates(map[string]interface{}{
 			"Content":  content,
@@ -92,7 +114,7 @@ func UpdateBlog(id int, content string, image string, category string) Blog {
 		})
 
 	log.Println("Update Blog Success")
-	return updateBlog
+	return res
 }
 
 func DeleteBlog(id int) *Blog {
@@ -100,7 +122,7 @@ func DeleteBlog(id int) *Blog {
 	defer db.Close()
 
 	var blog Blog
-	blog = GetBlogByID(id)
+	blog = GetBlogById(id)
 
 	if blog.Id == 0 {
 		log.Println("Delete Blog Failed")

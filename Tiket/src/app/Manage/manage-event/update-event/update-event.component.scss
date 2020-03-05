@@ -1,0 +1,10 @@
+.contain{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    .err{
+        font-size: 15px;
+        color: red;
+    }
+}

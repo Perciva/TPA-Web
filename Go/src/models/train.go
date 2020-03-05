@@ -1,8 +1,8 @@
 package models
 
 import (
-	"../../connection"
 	"Connection"
+	"fmt"
 	"log"
 	"time"
 )
@@ -11,7 +11,7 @@ type Train struct {
 	Id            int          `gorm:"PRIMARY_KEY"`
 	Name          string       `gorm:"VARCHAR(100); NOT NULL"`
 	Code          string       `gorm:"VARCHAR(100); NOT NULL"`
-	Class         []TrainClass `gorm:"FOREIGNKEY:TrainId"`
+	Class         TrainClass  `gorm:"FOREIGNKEY:TrainId"`
 	Arrival       TrainStation `gorm:"FOREIGNKEY:ArrivalId"`
 	ArrivalId     int          `gorm:"INTEGER; NOT NULL"`
 	ArrivalTime   time.Time
@@ -89,7 +89,7 @@ func InsertTrain(name string, code string, arrival string, arrivalTime time.Time
 	db.Model(newTrain).Related(&newTrain.Arrival, "arrival_Id")
 	db.Model(newTrain).Related(&newTrain.Class, "train_Id")
 
-	log.Println("Insert New Train Success")
+	log.Println(newTrain,"Insert New Train Success")
 	return newTrain
 }
 
@@ -108,6 +108,44 @@ func GetTrainById(Id int) Train {
 	db.Model(train).Related(&train.Class, "train_Id")
 
 	return train
+}
+func GetTrainByLoc(arrival string, destination string, date time.Time) []Train {
+	db := Connection.Connect()
+	defer db.Close()
+
+	arrivalStation := SearchTrainStationByName(arrival)
+	departureStation := SearchTrainStationByName(destination)
+
+	fmt.Println(arrival,destination,date.Day())
+
+	var train []Train
+	db.Where("arrival_id = ? AND departure_id = ? AND DATE_PART('day',arrival_time) = ?",
+		arrivalStation.Id, departureStation.Id, date.Day()).Find(&train)
+
+	for i, _ := range train {
+		db.Model(train[i]).Related(&train[i].Departure, "departure_id")
+		db.Model(train[i]).Related(&train[i].Transit, "transit_id")
+		db.Model(train[i]).Related(&train[i].Arrival, "arrival_id")
+	}
+
+	return train
+}
+func GetTrainName()[]Train{
+	db := Connection.Connect()
+	defer db.Close()
+
+	var train []Train
+	db.Select("Name").Group("Name").Find(&train)
+	for i, _ := range train {
+		db.Model(train[i]).Related(&train[i].Departure, "departure_Id")
+		db.Model(train[i]).Related(&train[i].Transit, "transit_Id")
+		db.Model(train[i]).Related(&train[i].Arrival, "arrival_Id")
+		db.Model(train[i]).Related(&train[i].Class, "trainId")
+	}
+	fmt.Println("train names", train)
+
+	return train
+
 }
 
 func UpdateTrain(Id int, arrivalTime time.Time, departureTime time.Time, seat int, price int) Train {
@@ -134,7 +172,7 @@ func UpdateTrain(Id int, arrivalTime time.Time, departureTime time.Time, seat in
 	db.Model(newTrain).Related(&newTrain.Arrival, "arrival_Id")
 	db.Model(newTrain).Related(&newTrain.Class, "train_Id")
 
-	log.Println("Update Train Success")
+	log.Println(newTrain,"Update Train Success")
 	return newTrain
 }
 
@@ -144,7 +182,7 @@ func DeleteTrain(Id int) *Train {
 
 	var train Train
 	train = GetTrainById(Id)
-
+	fmt.Println("Deleteing -> Resolver",train)
 	if train.Id == 0 {
 		log.Println("Delete User Failed")
 		return &train

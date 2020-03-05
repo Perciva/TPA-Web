@@ -1,0 +1,56 @@
+<div class="container">
+    <mat-form-field>
+        <input matInput type="text" id="name" placeholder="Train Name">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="text" id="code" placeholder="Train Code">
+    </mat-form-field>
+    
+    <mat-form-field >
+        <input  matInput type="text"id="arriveStation" placeholder="Train Arrival Station">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Train Arrival Date</mat-label>
+        <input matInput id="arriveDate" [matDatepicker]="arrivalDate">
+        <mat-datepicker-toggle matSuffix [for]="arrivalDate"></mat-datepicker-toggle>
+        <mat-datepicker #arrivalDate></mat-datepicker>
+
+    </mat-form-field>
+
+    <div class="timepicker" >
+        <ngx-timepicker-field [formControl]="arrivalTimeFC" [format]="24" [controlOnly]="true">12</ngx-timepicker-field>
+      </div>
+
+    <mat-form-field >
+        <input  matInput type="text" id="departureStation" placeholder="Train Destination Station">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Train Departure Date</mat-label>
+        <input matInput id="departureDate" [matDatepicker]="departureDate">
+        <mat-datepicker-toggle matSuffix [for]="departureDate"></mat-datepicker-toggle>
+        <mat-datepicker #departureDate></mat-datepicker>
+
+    </mat-form-field>
+
+    <div class="timepicker" >
+        <ngx-timepicker-field [formControl]="departureTimeFC" [format]="24" [controlOnly]="true">12</ngx-timepicker-field>
+      </div>
+
+    <mat-form-field>
+        <input matInput type="number" id="price" placeholder="Train Price">
+    </mat-form-field>
+    <mat-form-field >
+        <input  matInput type="text"id="transitStation" placeholder="Train Transit Station">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="number" id="seat" placeholder="Train Seat">
+    </mat-form-field>
+    <mat-form-field >
+        <input  matInput type="text"id="class" placeholder="Train Class">
+    </mat-form-field>
+    
+    <label class="errmsg" id="err">{{error}}</label>
+    <button mat-raised-button color="Primary" (click)="insert()">Insert</button>
+</div>

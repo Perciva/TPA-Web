@@ -1,0 +1,22 @@
+<div *ngIf="promo" class="promo">
+    <img src="{{promo.image}}" alt="">
+
+    <div class="detail">
+        {{promo.detail}}
+    </div>
+</div>
+<div class="share">
+    <button mat-button (click)="fb()">Facebook</button>
+    <button mat-button (click)="copy()">Copy </button>
+    <button mat-button (click)="line()">Line</button>
+    <button mat-button (click)="wa()">WhatsApp</button>
+</div>
+<h1>Other Promos</h1>
+
+<div *ngFor="let item of rec">
+    <img src="{{item.image}}" alt="">
+    <div>
+        {{item.detail}}
+    </div>
+
+</div>

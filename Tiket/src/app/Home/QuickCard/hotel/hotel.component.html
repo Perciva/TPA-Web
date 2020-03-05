@@ -11,15 +11,15 @@
 
 <div class="container">
     <div class="box">
-        <label for="from">Tujuam</label>
-        <input id="from" type="text" placeholder="Mau Nginep Ke Mana?">
+        <label for="from">Tujuan</label>
+        <input id="from" type="text" placeholder="Mau Nginep Di Mana?">
     </div>
 
     <div class="box">
        <label for="">Check-In</label>
        <mat-form-field>
            <mat-label>Choose a date</mat-label>
-           <input matInput [matDatepicker]="berangkatDate">
+           <input matInput [matDatepicker]="berangkatDate" id="berangkat">
            <mat-datepicker-toggle matSuffix [for]="berangkatDate"></mat-datepicker-toggle>
            <mat-datepicker #berangkatDate></mat-datepicker>
        </mat-form-field>
@@ -28,19 +28,19 @@
         <label for="">Check-Out</label>
         <mat-form-field>
             <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="pulangDate">
+            <input matInput [matDatepicker]="pulangDate" id="pulang">
             <mat-datepicker-toggle matSuffix [for]="pulangDate"></mat-datepicker-toggle>
             <mat-datepicker #pulangDate></mat-datepicker>
         </mat-form-field>
     </div>
     <div class="box">
         <label for="pclass">Tamu & Kamar</label>
-        <input id="pclass" type="text" placeholder="">
+        <input id="pclass" type="text" placeholder="berapa tamu, berapa kamar">
     </div>
 </div>
 
 <div class="buton" >
-    <button align="right">Cari 
-        Hotel
+    <button align="right" (click)="search()">
+        Cari Hotel
     </button>
 </div>

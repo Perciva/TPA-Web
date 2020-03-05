@@ -41,6 +41,25 @@ func dropHotel() {
 	db.DropTableIfExists(&Hotel{})
 	db.AutoMigrate(&Hotel{}).AddForeignKey("LocationId", "locations(id)", "cascade", "cascade")
 }
+func HotelFilter(locations []int,ratings []int , fac []string, min int, max int)[]Hotel{
+	db := Connection.Connect()
+	defer db.Close()
+
+	fmt.Println(locations,ratings)
+	var res []Hotel
+	db.Joins("JOIN hotel_facilities on hotels.id = hotel_facilities.hotel_id").
+		Find(&res, "(location_id IN (?) OR ?) AND (floor(rating) IN (?) OR ?) AND (hotel_facilities.name IN (?) OR ?) AND (price >= ? OR ? = -1) AND (price <= ? OR ? = -1)",locations, len(locations) == 0, ratings,len(ratings) == 0, fac, len(fac)==0,min,min,max,max)
+
+	for z, _ := range res {
+		db.Model(&res[z]).Related(&res[z].Location, "location_Id")
+		db.Model(&res[z]).Related(&res[z].Photo, "HotelId")
+		db.Model(&res[z]).Related(&res[z].Facility, "HotelId")
+		db.Model(&res[z]).Related(&res[z].Type, "HotelId")
+	}
+
+	fmt.Println("a",res)
+	return res
+}
 
 func GetAllHotel() []Hotel {
 	db := Connection.Connect()
@@ -65,6 +84,11 @@ func GetHotel(Id int) Hotel {
 	var res Hotel
 
 	db.Where("id=?", Id).First(&res)
+
+	db.Model(&res).Related(&res.Location, "location_Id")
+	db.Model(&res).Related(&res.Photo, "HotelId")
+	db.Model(&res).Related(&res.Facility, "HotelId")
+	db.Model(&res).Related(&res.Type, "HotelId")
 
 	fmt.Println("model GetHotel",res)
 	return res

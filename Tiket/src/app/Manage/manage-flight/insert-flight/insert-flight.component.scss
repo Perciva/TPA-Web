@@ -1,0 +1,18 @@
+.container{
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    .latlong{
+        display: flex;
+        justify-content: space-between;
+    }
+    .errmsg{
+        margin-top: 3px;
+        margin-bottom: 3px;
+        font-size: 13px;
+        color: red;
+    }
+}
+.err{
+    color: red;
+}

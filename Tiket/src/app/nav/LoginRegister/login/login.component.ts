@@ -91,6 +91,7 @@ export class LoginComponent implements OnInit {
     // console.log(this.user.facebook)
   }
   loginFromSocMed(){
+    console.log(this.user)
     if(this.user){
       var email:string = this.user.email
       this.userInput$=this.apollo.searchUserByEmailPhone(email).subscribe(async query => {

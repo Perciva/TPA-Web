@@ -22,5 +22,9 @@ export class PlaneHistoryComponent implements OnInit {
     console.log(event);
     this.data.emit(event);
   }
+  rem(){
+    console.log("AAAAAaa")
+    this.hist.removeHistory();
+  }
 
 }

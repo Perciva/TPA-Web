@@ -1,0 +1,42 @@
+<div class="container">
+    <mat-form-field>
+        <input matInput type="text" id="name" placeholder="Event Name">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="text" id="img" placeholder="Event Image">
+    </mat-form-field>
+    
+    <mat-form-field >
+        <input  matInput type="text"id="city" placeholder="Event Located in City">
+    </mat-form-field>
+    <div class="latlong">
+        <mat-form-field style="width: 7vw;">
+            <input matInput type="number" id="lat" placeholder="Latitude">
+        </mat-form-field>
+        <mat-form-field >
+            <input matInput type="number" id="long"placeholder="Longitude">
+        </mat-form-field>
+    </div>
+    <mat-form-field>
+        <input matInput type="number" id="price" placeholder="Price">
+    </mat-form-field>
+    <mat-form-field>
+        <textarea  matInput id="desc" placeholder="Event Description" rows="6"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Event Date</mat-label>
+        <input matInput id="date" [matDatepicker]="date">
+        <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+        <mat-datepicker #date></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Event Category</mat-label>
+        <mat-select [(ngModel)]="category">
+            <mat-option value="Sport Event"> Sport Event </mat-option>
+            <mat-option value="Relaxation"> Relaxation </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <label class="errmsg" id="err">{{error}}</label>
+    <button mat-raised-button color="Primary" (click)="insert()" >Insert</button>
+</div>

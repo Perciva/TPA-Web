@@ -1,0 +1,13 @@
+<div class="outmost">
+    <button mat-raised-button (click)="createBlog()" color="primary">Create New Story</button>
+
+
+    <div class="container">
+        <div class="box" *ngFor="let d of allData">
+        <img src="{{d.image}}">
+        <p [innerHTML]="d.title"></p>
+        <button mat-raised-button color="warn" (click)="ToDetail(d)">See Detail</button>
+        </div>
+    </div>
+  
+</div>

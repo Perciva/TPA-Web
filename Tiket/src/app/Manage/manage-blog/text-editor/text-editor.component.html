@@ -1,0 +1,16 @@
+<div class="container">
+
+    <div class="button">
+      <button mat-raised-button href="javascript:void(0)" (click)="format('bold')" >B</button>
+      <button mat-raised-button href="javascript:void(0)" (click)="format('italic')">I</button>
+      <button mat-raised-button href="javascript:void(0)" (click)="format('underline')">U</button>
+      <button mat-raised-button href="javascript:void(0)" (click)="format('strikethrough')">S</button>
+      <button mat-raised-button href="javascript:void(0)" (click)="format('insertunorderedlist')">Ul</button>
+      <button mat-raised-button href="javascript:void(0)" (click)="format('insertorderedlist')">L</button>
+    </div>
+  
+    <div class="editor">
+        <div class="title" #title contenteditable="true"></div>
+      <div class="content" #content contenteditable="true"></div>
+    </div>
+</div>

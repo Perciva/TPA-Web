@@ -3,11 +3,11 @@ package Resolver
 import (
 	"errors"
 	"github.com/graphql-go/graphql"
-	"models/hotel"
+	"models"
 )
 
 func GetAllHotelfac(p graphql.ResolveParams)(i interface{}, err error){
-	res:= hotel.GetAllHotelFacility()
+	res:= models.GetAllHotelFacility()
 
 	if(len(res) == 0){
 		return nil, errors.New("No Data Found")
@@ -21,7 +21,7 @@ func CreateHotelFac(p graphql.ResolveParams)(i interface{}, err error){
 	name:= p.Args["name"].(string)
 	path:= p.Args["path"].(string)
 
-	res := hotel.InsertHotelFacility(hotelid, name, path)
+	res := models.InsertHotelFacility(hotelid, name, path)
 
 	return res,nil
 }

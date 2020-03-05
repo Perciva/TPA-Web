@@ -1,3 +1,4 @@
+import { SocialUser, AuthService, GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
 import { Query } from './../../../Models/query';
 import { User } from './../../../Models/user';
 import { Subscription } from 'rxjs';
@@ -13,14 +14,20 @@ export class RegisterComponent implements OnInit {
   private img:boolean = false;//if false -> invisible
   private message:string = "tes";
   private disable:boolean = false;
+  private user: SocialUser
 
   constructor(
     private apollo: ApolloService,
+    private auth:AuthService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private ref:MatDialogRef<RegisterComponent>
   ) { }
 
   ngOnInit() {
+    this.auth.authState.subscribe((user) => {
+      this.user = user;
+
+    });
     console.log(this.disable)
     if(this.data){
       if(this.data.length != 0 && this.data != null){
@@ -93,7 +100,7 @@ export class RegisterComponent implements OnInit {
     this.err(id)
   }
   regis$:Subscription;
-
+  userInput$:Subscription;
   register():void{
     var fname:string =(<HTMLInputElement>document.getElementById('fname')).value;
     var lname:string =(<HTMLInputElement>document.getElementById('lname')).value;
@@ -125,6 +132,51 @@ export class RegisterComponent implements OnInit {
         })
       }
     }
+  }
+  signInGoogle():void{
+    this.auth.signIn(GoogleLoginProvider.PROVIDER_ID)
+    this.loginFromSocMed()
+  }
+  signInFB():void{
+    this.auth.signIn(FacebookLoginProvider.PROVIDER_ID)
+    this.loginFromSocMed()
+    // console.log(this.user.facebook)
+  }
+  loginFromSocMed(){
+    console.log("Helo", this.user)
+    if(this.user){
+      var email:string = this.user.email
+      this.userInput$=this.apollo.searchUserByEmailPhone(email).subscribe(async query => {
+        await this.tes(query)
+    })
+    }
+  }
+  close():void{
+    this.auth.signOut(true)
+    this.ref.close()
+  }
+  tes(a: any) {
+    console.log(a.data.userbyemailphone.length);
+      this.data = a.data.userbyemailphone
+
+      if(this.data.length === 0){
+        if(this.user){
+          var newUser:User = new User(this.user.firstName, this.user.lastName, this.user.email, "" ,"")
+          // console.log(newUser)
+          this.regis$ = this.apollo.createUser(newUser).subscribe(async (d:any) => {
+            console.log(d)
+          })
+          
+          return;
+        }
+        else{
+
+          this.close()
+        }
+      }
+      else{
+        alert("Your email already registered! please Log In")
+      }
   }
 
 }

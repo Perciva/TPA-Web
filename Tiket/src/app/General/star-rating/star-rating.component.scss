@@ -1,0 +1,26 @@
+.container {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+  
+    vertical-align: middle;
+  
+    color: darkgray;
+
+    .rate {
+        position: absolute;
+        left: 0;
+        top: 0;
+        overflow: hidden;
+        
+        white-space: nowrap;
+        color: #9b870c;
+    }
+    .contain:before, .rate:before {
+        content:"\2605\2605\2605\2605\2605";
+        font-size: 20pt;
+    }
+    
+    
+  }
+  

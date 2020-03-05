@@ -2,6 +2,7 @@ package models
 
 import (
 	"Connection"
+	"fmt"
 	"log"
 	"time"
 )
@@ -41,7 +42,16 @@ func GetAllFlightAirport() []FlightAirport {
 
 	return airport
 }
+func InFlight(){
+	InsertFlightAirport("Cirebon", "CBN",	"Cirebon")
+	InsertFlightAirport("El Tari",	"KOE",	"Kupang")
+	InsertFlightAirport("Halim Perdanakusuma", "HLP",	"Jakarta")
+	InsertFlightAirport("Hasanuddin", "UPG",	"Makassar")
+	InsertFlightAirport("Husein Sastranegara", "BDO",	"Bandung")
+	InsertFlightAirport("Pattimura", "AMQ"	,"Ambon")
+	InsertFlightAirport("Soekarno-Hatta", "CGK",	"Cengkareng")
 
+}
 func InsertFlightAirport(name string, code string, city string) *FlightAirport {
 	db := Connection.Connect()
 	defer db.Close()
@@ -63,10 +73,12 @@ func GetFlightAirportByCode(code string) FlightAirport {
 	db := Connection.Connect()
 	defer db.Close()
 
+	fmt.Println(code)
 	var airport FlightAirport
 	db.Where("code = ?", code).First(&airport)
 
+		fmt.Println(airport)
 	db.Model(&airport).Related(&airport.Location, "location_Id")
-
+	fmt.Println(airport)
 	return airport
 }

@@ -1,9 +1,11 @@
+import { NotificationComponent } from './General/notification/notification.component';
+import { ChatComponent } from './Temp/chat/chat.component';
+
 import { ManageModule } from './Modules/manage.module';
 import { HomePageComponent } from './Home/home-page/home-page.component';
 import { QuickCardComponent } from './Home/QuickCard/quick-card/quick-card.component';
 import { ImageSliderComponent } from './Home/image-slider/image-slider.component';
 import { RegisterComponent } from './nav/LoginRegister/register/register.component';
-import { MapComponent } from './app/temp/map/map.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -21,6 +23,23 @@ import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { QuickCardModule } from './Modules/quick-card.module';
+import { StarRatingComponent } from './General/star-rating/star-rating.component';
+import {icon, Marker} from 'leaflet';
+const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
+const iconUrl = 'assets/leaflet/images/marker-icon.png';
+const shadowUrl = 'assets/leaflet/images/marker-shadow.png';
+
+const iconDefault = icon({
+  iconRetinaUrl,
+  iconUrl,
+  shadowUrl,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  tooltipAnchor: [16, -28],
+  shadowSize: [41, 41]
+});
+Marker.prototype.options.icon = iconDefault;
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,11 +47,13 @@ import { QuickCardModule } from './Modules/quick-card.module';
     FooterComponent,
     FooterTopComponent,
     LoginComponent,
-    MapComponent,
     RegisterComponent,
     ImageSliderComponent,
     QuickCardComponent,
-    HomePageComponent
+    HomePageComponent,
+    ChatComponent,
+    NotificationComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -42,7 +63,7 @@ import { QuickCardModule } from './Modules/quick-card.module';
     GraphQLModule,
     HttpClientModule,
     QuickCardModule,
-    ManageModule
+    ManageModule,
   ],
   providers: [
     // {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}+++++++++++++++++

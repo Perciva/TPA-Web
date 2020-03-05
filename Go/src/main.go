@@ -52,6 +52,9 @@ func main(){
 	tes := SetCORS(h)
 
 	//models.InLoc()
+	//models.InTrainStation()
+	//models.InFlight()
+	//models.InFlightCompany()
 	log.Fatal(http.ListenAndServe(":4100",tes))
 	//router := router.NewRouter()
 	//router.HandleFunc("/api",Cors)

@@ -1,0 +1,50 @@
+<div class="container">
+    <mat-form-field>
+        <input matInput type="text" id="name" placeholder="Flight Company Name">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="text" id="model" placeholder="Flight Model">
+    </mat-form-field>
+    
+    <mat-form-field >
+        <input  matInput type="text"id="arriveAirport" placeholder="Flight Arrival Airport">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Flight Arrival Date</mat-label>
+        <input matInput id="arriveDate" [matDatepicker]="arrivalDate">
+        <mat-datepicker-toggle matSuffix [for]="arrivalDate"></mat-datepicker-toggle>
+        <mat-datepicker #arrivalDate></mat-datepicker>
+
+    </mat-form-field>
+
+    <div class="timepicker" >
+        <ngx-timepicker-field [formControl]="arrivalTimeFC" [format]="24" [controlOnly]="true">12</ngx-timepicker-field>
+      </div>
+
+    <mat-form-field >
+        <input  matInput type="text" id="departureAirport" placeholder="Flight Destination Airport">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Flight Departure Date</mat-label>
+        <input matInput id="departureDate" [matDatepicker]="departureDate">
+        <mat-datepicker-toggle matSuffix [for]="departureDate"></mat-datepicker-toggle>
+        <mat-datepicker #departureDate></mat-datepicker>
+
+    </mat-form-field>
+
+    <div class="timepicker" >
+        <ngx-timepicker-field [formControl]="departureTimeFC" [format]="24" [controlOnly]="true">12</ngx-timepicker-field>
+      </div>
+
+    <mat-form-field>
+        <input matInput type="number" id="price" placeholder="Flight Price">
+    </mat-form-field>
+    <mat-form-field >
+        <input  matInput type="text"id="transitAirport" placeholder="Flight Transit Airport">
+    </mat-form-field>
+    
+    <label class="errmsg" id="err">{{error}}</label>
+    <button mat-raised-button color="Primary" (click)="insert()">Insert</button>
+</div>

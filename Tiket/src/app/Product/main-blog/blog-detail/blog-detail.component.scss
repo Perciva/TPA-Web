@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .share {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      
+      cursor: pointer;
+        button{
+            background-color: mediumspringgreen;
+        } 
+    }
+  }
+  img {
+    border-radius: 1px;
+    width: 30vw;
+  }
+  

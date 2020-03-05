@@ -1,0 +1,19 @@
+<div class="container">
+    <label class="title"> Insert Blog</label>
+
+    <app-text-editor #editor [c1]="arg"></app-text-editor>
+
+    <mat-form-field>
+        <input matInput placeholder="Image Link" [(ngModel)]="image">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select placeholder="Blog Category" [(ngModel)]="args" name="item">
+            <mat-option value="Information">Information</mat-option>
+            <mat-option value="Culinary">Culinary</mat-option>
+            <mat-option value="Travel">Travel</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <button mat-button (click)="insert()">Insert Blog</button>
+</div>

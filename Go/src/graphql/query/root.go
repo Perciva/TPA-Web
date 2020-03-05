@@ -108,8 +108,135 @@ func GetRoot() *graphql.Object{
 					},
 				},
 			},
-
-
+			"getfilteredhotel":{
+				Type: graphql.NewList(types.GetHotelType()),
+				Resolve: Resolver.FilterHotel,
+				Args: graphql.FieldConfigArgument{
+					"locations" : &graphql.ArgumentConfig{
+						Type: graphql.NewList(graphql.Int),
+					},
+					"ratings" : &graphql.ArgumentConfig{
+						Type: graphql.NewList(graphql.Int),
+					},
+					"facilities": &graphql.ArgumentConfig{
+						Type: graphql.NewList(graphql.String),
+					},
+					"min": &graphql.ArgumentConfig{
+						Type: graphql.Int,
+					},
+					"max": &graphql.ArgumentConfig{
+						Type: graphql.Int,
+					},
+				},
+			},
+			"getallcarmodel": {
+				Type:        graphql.NewList(types.GetCarModelType()),
+				Resolve:     Resolver.AllCarModel,
+			},
+			"getallcar": {
+				Type:        graphql.NewList(types.GetCarType()),
+				Resolve:     Resolver.AllCar,
+			},
+			"getcarbycity": {
+				Type: graphql.NewList(types.GetCarType()),
+				Args: graphql.FieldConfigArgument{
+					"city": &graphql.ArgumentConfig{
+						Type: graphql.String,
+					},
+				},
+				Resolve:     Resolver.GetCarByCity,
+			},
+			"getalltrain": {
+				Type:        graphql.NewList(types.GetTrainType()),
+				Resolve:     Resolver.AllTrain,
+			},
+			"gettrainbyloc": {
+				Type:        graphql.NewList(types.GetTrainType()),
+				Resolve:     Resolver.GetTrainByLoc,
+				Args: graphql.FieldConfigArgument{
+					"arrival": &graphql.ArgumentConfig{
+						Type: graphql.String,
+					},
+					"departure": &graphql.ArgumentConfig{
+						Type: graphql.String,
+					},
+					"date": &graphql.ArgumentConfig{
+						Type: graphql.String,
+					},
+				},
+			},
+			"getrecblog": {
+				Type:        graphql.NewList(types.GetBlogType()),
+				Resolve:     Resolver.GetRecBlog,
+				Args: graphql.FieldConfigArgument{
+					"id": &graphql.ArgumentConfig{
+						Type: graphql.Int,
+					},
+				},
+			},
+			"getblogbyid": {
+				Type:    types.GetBlogType(),
+				Resolve: Resolver.GetBlogById,
+				Args: graphql.FieldConfigArgument{
+					"id": &graphql.ArgumentConfig{
+						Type: graphql.Int,
+					},
+				},
+			},
+			"getpromobyid": {
+				Type: types.GetPromoType(),
+				Resolve:  Resolver.GetPromo,
+				Args: graphql.FieldConfigArgument{
+					"id": &graphql.ArgumentConfig{
+						Type: graphql.Int,
+					},
+				},
+			},
+			"getotherpromo": {
+				Type: graphql.NewList(types.GetPromoType()),
+				Resolve:   Resolver.OtherPromo,
+				Args: graphql.FieldConfigArgument{
+					"id": &graphql.ArgumentConfig{
+						Type: graphql.Int,
+					},
+				},
+			},
+			"getalltrainclass": {
+				Type:        graphql.NewList(types.GetTrainClassType()),
+				Resolve:     Resolver.AllTrainClass,
+			},
+			"gettrainnames": {
+				Type:        graphql.NewList(types.GetTrainType()),
+				Resolve:     Resolver.GetTrainName,
+			},
+			"getalltrainstation": {
+				Type:        graphql.NewList(types.GetTrainStationType()),
+				Resolve:     Resolver.AllTrainStation,
+			},
+			"getallflight": {
+				Type:        graphql.NewList(types.GetFlightType()),
+				Resolve:     Resolver.AllFlight,
+			},
+			"getallentertainment": {
+				Type:        graphql.NewList(types.GetEntertainmentType()),
+				Resolve:     Resolver.AllEntertainment,
+			},
+			"getallflightfacility": {
+				Type:        graphql.NewList(types.GetFlightFacilityType()),
+				Resolve:     Resolver.AllFlightFacility,
+			},
+			"getallflightcompany": {
+				Type:        graphql.NewList(types.GetFlightCompanyType()),
+				Resolve:     Resolver.AllFlightCompany,
+			},
+			"getallflightairport": {
+				Type:        graphql.NewList(types.GetFlightAirportType()),
+				Resolve:     Resolver.AllFlightAirport,
+			},
+			"getallblog": {
+				Type:        graphql.NewList(types.GetBlogType()),
+				Resolve:     Resolver.AllBlog,
+			},
 		},
 		IsTypeOf:    nil,
 		Description: "",

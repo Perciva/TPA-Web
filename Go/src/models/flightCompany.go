@@ -2,6 +2,7 @@ package models
 
 import (
 	"Connection"
+	"fmt"
 	"log"
 	"time"
 )
@@ -34,7 +35,13 @@ func GetAllFlightCompany() []FlightCompany {
 
 	return company
 }
+func InFlightCompany(){
+	InsertFlightCompany("Air Esia", "airesia.jpg")
+	InsertFlightCompany("Lion Air", "lionair.jpg")
+	InsertFlightCompany("Garuda Airlines", "garuda.jpg")
+	InsertFlightCompany("Air Esia", "mandala.jpg")
 
+}
 func GetFlightCompanyByName(name string) FlightCompany {
 	db := Connection.Connect()
 	defer db.Close()
@@ -42,6 +49,7 @@ func GetFlightCompanyByName(name string) FlightCompany {
 	var company FlightCompany
 	db.Where("name = ?", name).First(&company)
 
+	fmt.Println(company)
 	return company
 }
 

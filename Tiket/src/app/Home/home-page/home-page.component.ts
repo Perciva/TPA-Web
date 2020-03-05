@@ -28,6 +28,9 @@ export class HomePageComponent implements OnInit {
     //   // this.ref.close()
     // })
   }
+  wa(){
+    window.open('https://api.whatsapp.com/send?phone=62895360356233')
+  }
   pop() {
     scrollTo(<number><unknown>document.documentElement,200);
     document.getElementById('container').classList.add('pop');
@@ -65,4 +68,5 @@ export class HomePageComponent implements OnInit {
     t--;
     return -c / 2 * (t * (t - 2) - 1) + b;
   }
+  
 }

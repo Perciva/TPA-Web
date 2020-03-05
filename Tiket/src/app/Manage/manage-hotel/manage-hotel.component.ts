@@ -1,11 +1,10 @@
 import { InsertHotelComponent } from './insert-hotel/insert-hotel.component';
-import { isNumber } from 'util';
 import { Subscription } from 'rxjs';
 import { ApolloService } from './../../Services/apollo.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatTab, MatDialog, MatDialogRef, MatPaginator } from '@angular/material';
-import { AttachSession } from 'protractor/built/driverProviders';
+import { MatTableDataSource, MatTab, MatDialog, MatDialogRef, MatPaginator, MatSort } from '@angular/material';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+
 
 
 @Component({
@@ -14,7 +13,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
   styleUrls: ['./manage-hotel.component.scss']
 })
 export class ManageHotelComponent implements OnInit {
-  private columns= ['Image', 'Name','Description','Price','Rating','Facilities','Address','Type','Update','Delete']
+  private columns= ['Image', 'name','Description','price','rating','Facilities','address','Type','Update','Delete']
   private allHotel$:Subscription
   private path:string
   private hotels:any
@@ -24,6 +23,8 @@ export class ManageHotelComponent implements OnInit {
   constructor(private apollo: ApolloService, private dialog: MatDialog) { }
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sorter: MatSort;
+
   ngOnInit() {
     this.path = "../../../assets/Hotel/"
     this.dataSource = null
@@ -40,6 +41,7 @@ export class ManageHotelComponent implements OnInit {
     this.hotels = res.data.allHotel
     this.dataSource = new MatTableDataSource(this.hotels);
     this.dataSource.paginator = this.paginator
+    this.dataSource.sort = this.sorter
     console.log(this.dataSource.data)
     for(let h of this.dataSource.data){
       for(let i of h.type){

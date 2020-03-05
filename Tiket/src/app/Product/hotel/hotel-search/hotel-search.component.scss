@@ -1,0 +1,108 @@
+.outmost{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    .top{
+        width: 80%;
+        .container{
+            margin-top: 30px;
+            display: flex;
+            flex-direction: row;
+            font-size: 19px;
+            justify-content: space-between;
+            height: 40%;
+            padding-bottom: 2vw;
+            .box{
+                width: 25%;
+                // height: 10%;
+                padding: 1vw 2vw 1px 2vw;
+                border-right: solid gainsboro 1px;
+                border-top: solid gainsboro 1px;
+                border-bottom: solid gainsboro 1px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+            input[type=text]{
+                padding: 10px;
+                border:none;
+                outline: none;
+                font-size: 20px;
+            }
+        }
+        .buton{
+            width: 100%;
+            display: flex;
+            flex-direction: row-reverse;
+            button{
+                cursor: pointer;
+                font-size: 19px;
+                border:none;
+                background-color: rgb(255, 208, 0);
+                padding: 10px 20px;
+                color: blue;
+                border-radius:19px;
+            }
+            
+        }
+    }
+
+    .loc{
+        height: 300px;
+        overflow-y: scroll;
+    }
+
+    .content-wrap{
+        display: flex;
+        flex-direction: row;
+        border:solid 1px black;
+        height:100%;
+        .filter{
+            width: 20vw;
+            min-width:14vw;
+        }
+    }
+    .content-container{
+       
+        display: flex;
+        flex-direction: column;
+        .box{
+            margin: 10px;
+            padding: 1vw;
+            border:1px solid black;
+            display: flex;
+            flex-direction: row;
+            cursor: pointer;
+            .image{
+                width: 15vw;
+                height: 10vw;
+                background-color:red;
+                margin-right: 10px;
+                img{
+                    width: 15vw;
+                    height: 10vw;
+                }
+            }
+            .text{
+                display: flex;
+                flex-direction: column;
+
+
+            }
+        }
+
+    }
+
+}
+
+::ng-deep {
+    .ng5-slider {
+      .ng5-slider-pointer {
+        display: none !important;
+      }
+  
+      .ng5-slider-selection {
+        background: #9b0c0c !important;
+      }
+    }
+  }

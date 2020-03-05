@@ -1,0 +1,122 @@
+<div class="outmost">
+    <div class="top">
+        <div class="container">
+            <div class="box">
+                <label for="from">Dari</label>
+                <input id="from" type="text" value="{{p.from}}" placeholder="Kota atau stasiun">
+            </div>
+            <div class="box">
+                <label for="dest">Ke</label>
+                <input id="dest" type="text" value="{{p.to}}" placeholder="Mau Ke Mana?">
+            </div>
+            <div class="box">
+               <label for="">Berangkat</label>
+               <mat-form-field>
+                   <mat-label>Choose a date</mat-label>
+                   <input matInput id="berangkat" [matDatepicker]="berangkatDate">
+                   <mat-datepicker-toggle matSuffix [for]="berangkatDate"></mat-datepicker-toggle>
+                   <mat-datepicker #berangkatDate></mat-datepicker>
+               </mat-form-field>
+            </div>
+            <div class="box">
+                <label for="">Pulang</label>
+                <mat-form-field>
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput id="pulang" [matDatepicker]="pulangDate">
+                    <mat-datepicker-toggle matSuffix [for]="pulangDate"></mat-datepicker-toggle>
+                    <mat-datepicker #pulangDate></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="box">
+                <label for="pclass">Penumpang </label>
+                <input id="pclass" value={{p.people}},{{p.jenis}} type="text" placeholder="Dewasa Bayi">
+            </div>
+        </div>
+    </div>
+
+    <div class="content-wrap">
+        <div class="filter">
+            <button mat-raised-button color="primary" (click)="resetFilter()">Reset</button>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Classes
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="loc">
+                    <div *ngFor="let item of Classes; let i =index" >
+                        <mat-checkbox [(ngModel)]="ClassesModel[i]" (change)= changed()>{{item}}</mat-checkbox>
+                    </div>
+                </div>
+            
+              </mat-expansion-panel>
+
+              <mat-divider></mat-divider>
+
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Time
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div>
+                    <div *ngFor="let item of hours; let i =index">
+                        <mat-checkbox [(ngModel)]="hoursModel[i]" (change) = changed()>
+                            {{item}}
+                        </mat-checkbox>
+                    </div>
+                </div>
+              </mat-expansion-panel>
+
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Train Name
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div>
+                    <div *ngFor="let item of trainName; let i =index">
+                        <mat-checkbox [(ngModel)]="trainNameModel[i]">
+                            {{item.name}}
+                        </mat-checkbox>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+
+              
+            <mat-select [(value)]="SortBy">
+                <mat-option value="Recommended">Recommended</mat-option>
+                <mat-option value="lowestPrice">Price (Lowest First)</mat-option>
+                <mat-option value="highestPrice">Price (Highest First)</mat-option>
+                <mat-option value="shortestDuration">Short Duration</mat-option>
+                <mat-option value="typeAsc">Type (Lowest First)</mat-option>
+                <mat-option value="typeDesc">Type (Highest First)</mat-option>
+                <mat-option value="classAsc">Class (Lowest First)</mat-option>
+                <mat-option value="classDesc">Class (Highest First)</mat-option>
+                <mat-option value="transitAsc">Rating (Lowest First)</mat-option>
+                <mat-option value="transitDesc">Rating (Highest First)</mat-option>
+            </mat-select>
+              
+        </div>
+
+        <div class="content-container">
+
+            <div *ngFor="let train of trains | trainSort: SortBy" class="content-container">
+                <div class="box" (click)=goToDetail(train)>
+                    <div class="text">
+                        {{train.name}} {{train.code}}
+                        <br>
+                        {{train.departureTime}} - {{train.arrivalTime}}
+                        <br>
+                        {{train.departure.code}} - {{train.arrival.code}}
+                        <br>
+                        {{train.price}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

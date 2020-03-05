@@ -1,0 +1,146 @@
+
+.outmost{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .top{
+        z-index: 10;
+        position: absolute;
+        top: 0;
+
+        width: 80%;
+        height: 150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .container{
+            margin-top: 30px;
+            display: flex;
+            flex-direction: row;
+            font-size: 19px;
+            justify-content: space-between;
+            height: 40%;
+            padding-bottom: 2vw;
+            .box{
+                width: 25%;
+                min-height: 100px;
+                padding: 1vw 2vw 1px 2vw;
+                border-right: solid gainsboro 1px;
+                border-top: solid gainsboro 1px;
+                border-bottom: solid gainsboro 1px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+            input[type=text]{
+                padding: 10px;
+                border:none;
+                outline: none;
+                font-size: 20px;
+            }
+        }
+        .buton{
+            width: 100%;
+            height: 100px;
+            display: flex;
+            flex-direction: row-reverse;
+            button{
+                cursor: pointer;
+                font-size: 19px;
+                border:none;
+                background-color: rgb(255, 208, 0);
+                padding: 10px 20px;
+                color: blue;
+                border-radius:19px;
+            }
+            
+        }
+    }
+    
+    .filter-container{
+        z-index: 20 ;
+        position: absolute;
+        top: 300px;
+        left: 0;   
+        display: flex;
+        flex-direction: row;
+        border:solid 1px black;
+        height:500px;
+        position: absolute;
+        .filter{
+            width: 20vw;
+            min-width:14vw;
+        }
+    }
+    .hotelngapung {
+        position: absolute;
+        z-index: 20;
+        top:300px;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        // top: 850px;
+        // right: 10px;
+        .hotelImage img {
+          width: 10vw;
+          height: 7vw;
+        }
+  
+        .hotelTitle {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+  
+          div {
+            font-size: 18px;
+          }
+        }
+  
+        .hotelData {
+          margin-top: 10px;
+  
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+  
+          img {
+            width: 20px;
+          }
+        }
+  
+        .hotel-button-order {
+  
+          margin-top: 10px;
+          padding: 10px;
+  
+          background-color: orange;
+          color: white;
+          font-size: 22px;
+          text-align: center;
+  
+          border-radius: 10px;
+  
+          cursor: pointer;
+        }
+      }
+    
+
+}
+
+.map{
+    width: 100%;
+    height: 100%;
+}
+::ng-deep {
+    .ng5-slider {
+      .ng5-slider-pointer {
+        display: none !important;
+      }
+  
+      .ng5-slider-selection {
+        background: #9b0c0c !important;
+      }
+    }
+  }

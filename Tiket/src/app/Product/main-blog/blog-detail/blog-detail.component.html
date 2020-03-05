@@ -1,0 +1,19 @@
+<div class="container" *ngIf="blogs && recs">
+    <img src="{{blogs.image}}" alt="">
+    <div [innerHTML]="blogs.content"></div>
+
+    <div class="share">
+        <button mat-button (click)="fb()">Facebook</button>
+        <button mat-button (click)="copy()">Copy </button>
+        <button mat-button (click)="line()">Line</button>
+        <button mat-button (click)="wa()">WhatsApp</button>
+    </div>
+</div>
+
+<div>
+    <div *ngFor="let r of recs">
+      <div><img src="{{r.image}}" alt=""></div>
+      <div [innerHTML]="r.title"></div>
+      <button mat-button (click)="goToDetail(r)">See Detail</button>
+    </div>
+  </div>

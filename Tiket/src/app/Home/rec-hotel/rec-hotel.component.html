@@ -25,7 +25,7 @@
             </div>
             <label>{{item.name}}</label>
             <label>{{item.price}}</label>
-            <label>{{item.description}}</label>
+            <app-star-rating [Rating]="item.rating/5*100"></app-star-rating>
         </div>
     </div>
   
