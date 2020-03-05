@@ -1,3 +1,4 @@
+import { EventDetailComponent } from './../Product/event-detail/event-detail.component';
 import { ChatroomComponent } from './../Product/chatroom/chatroom.component';
 import { PlaneSearchComponent } from './../Product/main-plane/plane-search/plane-search.component';
 import { CalendarComponent } from './../Product/main-plane/calendar/calendar.component';
@@ -19,7 +20,7 @@ import { CarComponent } from '../Home/QuickCard/car/car.component';
 import { PlaneComponent } from '../Home/QuickCard/plane/plane.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatRadioModule, MatDatepickerModule, MatNativeDateModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatSidenavModule, MatExpansionModule, MatProgressBarModule, MatDividerModule, MatButtonModule, MatSelectModule } from '@angular/material'
+import { MatRadioModule, MatDatepickerModule, MatNativeDateModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatSidenavModule, MatExpansionModule, MatProgressBarModule, MatDividerModule, MatButtonModule, MatSelectModule, MatStepperModule } from '@angular/material'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxContentLoadingModule } from 'ngx-content-loading';
 import { StarRatingComponent } from '../General/star-rating/star-rating.component';
@@ -64,7 +65,8 @@ const decs=[
   PlaneSearchComponent,
   MainPlaneComponent,
   ProfileComponent,
-  ChatroomComponent
+  ChatroomComponent,
+  EventDetailComponent
 
   
 ]
@@ -84,6 +86,7 @@ const imps = [
   Ng5SliderModule,
   MatButtonModule,
   MatSelectModule,
+  MatStepperModule
   
 ]
 @NgModule({

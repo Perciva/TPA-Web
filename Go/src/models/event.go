@@ -65,6 +65,8 @@ func GetEntertainmentById(id int) Entertainment {
 	}
 	db.Where("id = ?", id).First(&event)
 
+
+
 	return event
 }
 

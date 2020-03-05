@@ -96,6 +96,15 @@ func GetRoot() *graphql.Object{
 					},
 				},
 			},
+			"geteventbyid":{
+				Type: types.GetEntertainmentType(),
+				Resolve:Resolver.GetEntertainmentById,
+				Args: graphql.FieldConfigArgument{
+					"id": &graphql.ArgumentConfig{
+						Type:        graphql.Int,
+					},
+				},
+			},
 			"getlocbycity":{
 				Type: types.GetLocationType(),
 				Resolve: Resolver.GetLocByCity,

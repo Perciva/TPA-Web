@@ -110,6 +110,28 @@ export class ApolloService {
       }
     })
   }
+  selectEventById(id:number):Observable<Query>{
+    return this.apollo.query<Query>({
+      query: gql`
+      query getevenbyid($id:Int){
+        geteventbyid(id:$id){
+          content
+          date
+          id
+          image
+          latitude
+          location
+          longitude
+          price
+          title
+          type
+        }
+      }`,
+      variables:{
+        id:id
+      }
+    })
+  }
   selectAllHotelFacility():Observable<Query>{
     return this.apollo.query<Query>({
       query: gql`

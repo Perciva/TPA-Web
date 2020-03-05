@@ -28,6 +28,13 @@ export class HomePageComponent implements OnInit {
     //   // this.ref.close()
     // })
   }
+  subscribe(){
+    let email:string = (<HTMLInputElement>document.getElementById('email')).value
+
+    this.apollo.subscribe(email).subscribe(async a=>{
+      await console.log(a)
+    })
+  }
   wa(){
     window.open('https://api.whatsapp.com/send?phone=62895360356233')
   }

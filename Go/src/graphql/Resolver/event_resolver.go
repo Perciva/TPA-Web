@@ -23,6 +23,13 @@ func GetEntertainmentByCategory(p graphql.ResolveParams) (i interface{}, err err
 
 	return event,nil
 }
+func GetEntertainmentById(p graphql.ResolveParams) (i interface{}, err error){
+	id := p.Args["id"].(int)
+
+	event:= models.GetEntertainmentById(id)
+
+	return event,nil
+}
 func InsertEntertainment(p graphql.ResolveParams) (i interface{}, err error) {
 	title := p.Args["title"].(string)
 	price := p.Args["price"].(int)

@@ -1,14 +1,38 @@
 <app-image-slider></app-image-slider>
 
 <div class="trending-activites">
-    
+    <div *ngFor="let item of activites">
+        <img src="item.image" >
+        {{item.price}}
+        <br>
+        {{item.location}}
+        <br>
+        {{item.title}}
+
+    </div>
 </div>
 
 <div class="trending-attraction">
+    <div *ngFor="let item of attractions">
+        <img src="item.image" >
+        {{item.price}}
+        <br>
+        {{item.location}}
+        <br>
+        {{item.title}}
 
+    </div>
 </div>
 
 <div class="trending-Events">
+    <div *ngFor="let item of events">
+        <img src="item.image" >
+        {{item.price}}
+        <br>
+        {{item.location}}
+        <br>
+        {{item.title}}
 
+    </div>
 </div>
 

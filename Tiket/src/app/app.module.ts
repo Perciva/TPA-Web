@@ -26,6 +26,7 @@ import { QuickCardModule } from './Modules/quick-card.module';
 import { StarRatingComponent } from './General/star-rating/star-rating.component';
 import {icon, Marker} from 'leaflet';
 import { ProfileComponent } from './nav/profile/profile.component';
+import { EventComponent } from './Product/event/event.component';
 const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/images/marker-icon.png';
 const shadowUrl = 'assets/leaflet/images/marker-shadow.png';
@@ -53,7 +54,9 @@ Marker.prototype.options.icon = iconDefault;
     QuickCardComponent,
     HomePageComponent,
     ChatComponent,
-    NotificationComponent
+    NotificationComponent,
+    EventComponent
+
     
   ],
   imports: [

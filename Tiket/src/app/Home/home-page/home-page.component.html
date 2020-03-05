@@ -6,6 +6,12 @@
     <app-quick-card id="qcard" (click)="pop()" ></app-quick-card>
 </div>
 <button class="wa" (click)="wa()">WHATSAPP</button>
+
+<mat-form-field>
+    <input id="email" matInput placeholder="Input Email" >
+    <button mat-button (click) = "subscribe()">Subscribe!</button>
+</mat-form-field>
+
 <app-rec-hotel></app-rec-hotel>
 <app-footer></app-footer>
 <!-- <app-map></app-map> -->

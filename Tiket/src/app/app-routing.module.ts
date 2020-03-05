@@ -1,3 +1,5 @@
+import { EventDetailComponent } from './Product/event-detail/event-detail.component';
+import { EventComponent } from './Product/event/event.component';
 import { ChatroomComponent } from './Product/chatroom/chatroom.component';
 import { PlaneSearchComponent } from './Product/main-plane/plane-search/plane-search.component';
 import { MainCarComponent } from './Product/main-car/main-car.component';
@@ -91,11 +93,11 @@ const routes: Routes = [
     component: MainPlaneComponent
   },]},
   {path:'Event', children:[{
-    path:'Search',
-    component: PlaneSearchComponent
+    path:'Detail',
+    component: EventDetailComponent
   },{
     path:'',
-    component: MainPlaneComponent
+    component: EventComponent
   },]}
 ];
 
